@@ -6,18 +6,23 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Region;
+import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
+
 import java.util.ArrayList;
 
 public class LayOutCanvasResult extends View {
     private Paint paint ;
     private Path path ;
     int selectedLine = -1;
+    Boolean checkHandler = false ;
     private ArrayList<Region> regions = new ArrayList<>();
-    private ArrayList<Integer> measure=new ArrayList<Integer>();;
+    private ArrayList<Float> measure=new ArrayList<Float>();;
     private ArrayList<Float> xstart=new ArrayList<Float>();
     private ArrayList<Float> ystart=new ArrayList<Float>();
     private ArrayList<Float> xstop=new ArrayList<Float>();
@@ -40,10 +45,10 @@ public class LayOutCanvasResult extends View {
             float left = Math.max(xstart.get(i) , xstop.get(i));
             float top = Math.min(ystart.get(i) , ystop.get(i));
             float back = Math.max(ystart.get(i) , ystop.get(i));
-            regions.add(new Region((int) (right - 20), (int) (top - 20), (int) (left + 20), (int) (back + 20)));
+            regions.add(new Region((int) (right - 16), (int) (top - 16), (int) (left + 16), (int) (back + 16)));
             paint.setColor(Color.RED);
-            canvas.drawRect((float) (right-20) ,(float)(top-20) ,(float)(left
-                  +20 ),(float)(back+20) ,paint);
+            canvas.drawRect((float) (right-16) ,(float)(top-16) ,(float)(left
+                  +16 ),(float)(back+16) ,paint);
             paint.setColor(Color.BLUE);
 
         }
@@ -60,7 +65,6 @@ public class LayOutCanvasResult extends View {
             if(i == selectedLine){
                 paint.setColor(Color.RED);
                 canvas.drawLine(xstart.get(i) , ystart.get(i) , xstop.get(i) , ystop.get(i) , paint);
-                selectedLine = -1;
             }else{
                 paint.setColor(Color.BLUE);
                 canvas.drawLine(xstart.get(i) , ystart.get(i) , xstop.get(i) , ystop.get(i) , paint);
@@ -80,22 +84,65 @@ public class LayOutCanvasResult extends View {
     public boolean onTouchEvent(MotionEvent event) {
         int xPos = (int) event.getX();
         int yPos = (int)  event.getY();
-
-        for(int i =0;i< regions.size();i++){
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            for (int i = 0; i < regions.size(); i++) {
 //            Log.i("alaa" , "the Line you selected " + xPos);
 //            Log.i("alaa" , "the Line you selected " + xstart.get(i) + "and ends" + xstop.get(i));
 //            Log.i("alaa" , "the Line you selected y = " + yPos);
 //            Log.i("alaa" , "the Line you selected y =" + ystart.get(i) + "and ends" + ystop.get(i));
-            if(regions.get(i).contains(xPos,yPos)){
-                selectedLine = i ;
-                Log.i("alaa" , "the Line you region " + i);
-                break;
+                if (regions.get(i).contains(xPos, yPos)) {
+                    selectedLine = i;
+                      Log.i("alaa" , "the Line you region " + i +" and " + selectedLine);
+                    checkHandler = true ;
+                    break;
+                }
+//            if( (xstart.get(i) <= xPos ) && (xPos <= xstop.get(i))){
+//                if( (ystart.get(i) <= yPos ) && (yPos <= ystop.get(i))){
+//                selectedLine = i ;
+//                Log.i("alaa" , "the Line you foundeeeee " + i);
+//                break;}
+//            }
+
             }
-            if( (xstart.get(i) <= xPos ) && (xPos <= xstop.get(i))){
-                if( (ystart.get(i) <= yPos ) && (yPos <= ystop.get(i))){
-                selectedLine = i ;
-                Log.i("alaa" , "the Line you foundeeeee " + i);
-                break;}
+            if(checkHandler) {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        final EditText text = new EditText(getContext());
+
+                        builder.setTitle("Set your measurments")
+                                .setMessage("the measure of distance is  for line " + selectedLine + " :").setView(text);
+                        builder.setPositiveButton("DONE",
+                                null);
+
+
+                        final AlertDialog alert = builder.create();
+                        alert.show();
+                        alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Boolean flag = (text.getText().toString().trim().isEmpty());
+                                // if EditText is empty disable closing on possitive button
+                                if (!flag) {
+
+                                    float num = Float.parseFloat(text.getText().toString());
+                                    measure.add(num);
+                                    Log.i("alaa", "mabrook  " + num);
+                                    selectedLine = -1 ;
+                                    alert.dismiss();
+
+
+                                }
+
+                            }
+                        });
+
+
+                    }
+                }, 500);
+   checkHandler = false;
             }
         }
        // return super.onTouchEvent(event);
