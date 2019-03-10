@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Start</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_draw_layout">DrawLayout</string>
+    <string name="title_activity_lay_out_for_measures">LayOutForMeasuresActivity</string>
+    <string name="title_activity_layouttmeasures">Layouttmeasures</string>
+</resources>
