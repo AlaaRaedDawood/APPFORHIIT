@@ -5,11 +5,13 @@ public class PathLine {
     private PointF point2 ;
     private float size ;
     private int lineId ;
+    private boolean checked ;
     public PathLine(PointF point1 ,PointF point2  , float size , int lineId){
          this.point1 = point1;
         this.point2 = point2;
         this.size = size;
         this.lineId = lineId;
+        this.checked = false ;
     }
     public PointF getPoint1(){
         return point1 ;
@@ -19,6 +21,9 @@ public class PathLine {
     }
     public float getSize(){
         return size ;
+    }
+    public void setChecked (boolean f){
+        checked = f ;
     }
     public boolean checkexist(PathLine p){
         if((this.point1.equals(p.point1))&&(this.point2.equals(p.point2))){

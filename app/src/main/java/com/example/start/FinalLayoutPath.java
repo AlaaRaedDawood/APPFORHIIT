@@ -19,11 +19,14 @@ import java.util.ArrayList;
 public class FinalLayoutPath extends View {
     private Paint paint ;
     private float[] measures ;
+    ArrayList<PointF> resultPoints = new ArrayList<PointF>();
+    private ArrayList<PathLine> resultPath = new ArrayList<PathLine>();
     private ArrayList<PathLine> diagnoleLines = new ArrayList<PathLine>();
     ArrayList<IntersectedPoints> intersectPoints = new ArrayList<IntersectedPoints>();
     private   ArrayList<PointF> startPoints = new ArrayList<PointF>();
     private  ArrayList<PointF> stopPoints = new ArrayList<PointF>();
     private ArrayList<PathLine> pathLines = new ArrayList<PathLine>();
+    private ArrayList<PathLine> plines = new ArrayList<PathLine>();
     public FinalLayoutPath(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
@@ -47,10 +50,18 @@ public class FinalLayoutPath extends View {
             Log.i("alaa" , "number of paths are " + pathLines.size());
             if(pathLines.size() != 0) {
                 checkDiagnolePath();
-                Log.i("alaa" , "number of paths are " + diagnoleLines.size());
+                Log.i("alaa" , "number of diagnoles are " + diagnoleLines.size());
+                createResultPath();
+                for(int i = 0 ; i <resultPoints.size() ;i++){
+                    paint.setColor(Color.GRAY);
+                    canvas.drawCircle(resultPoints.get(i).getX() , resultPoints.get(i).getY() ,40 , paint);
+                    Log.i("alaa" , "the x = " + resultPoints.get(i).getX() + " y = " + resultPoints.get(i).getY() );
+                }
+               // Log.i("alaa" ,"  the ssssssssssss  "  + resultPath.size());
             }
         }
         for(int i = 0 ; i < startPoints.size();i++){
+            paint.setColor(Color.BLUE);
                 canvas.drawLine(startPoints.get(i).getX() , startPoints.get(i).getY() , stopPoints.get(i).getX() , stopPoints.get(i).getY() , paint);
             }
 
@@ -64,22 +75,26 @@ public class FinalLayoutPath extends View {
                 IntersectedPoints i2 = intersectPoints.get(j);
                 if((i1.getIndexOfLine1() == i2.getIndexOfLine1())&& (!flag)){
                     pathLines.add(new PathLine(i1.getPoint() ,i2.getPoint(),measures[i2.getIndexOfLine1()] , i2.getIndexOfLine1() ));
+                    plines.add(new PathLine(i1.getPoint() ,i2.getPoint(),measures[i2.getIndexOfLine1()] , i2.getIndexOfLine1() ));
                     flag = true ;
                    // Log.i("alaaaaaaaaa" , "1111111111111111 "  );
                 }
             if((i1.getIndexOfLine2() == i2.getIndexOfLine2()) && (!flag)){
              pathLines.add(new PathLine(i1.getPoint() ,i2.getPoint() ,measures[i2.getIndexOfLine2()] , i2.getIndexOfLine2() ));
+                plines.add(new PathLine(i1.getPoint() ,i2.getPoint() ,measures[i2.getIndexOfLine2()] , i2.getIndexOfLine2() ));
                flag = true ;
               //  Log.i("alaaaaaaaaa" , "222222222222222 "  );
                   }
 
                 if((i1.getIndexOfLine2() == i2.getIndexOfLine1()) && (!flag)){
                     pathLines.add(new PathLine(i1.getPoint() ,i2.getPoint() ,measures[i2.getIndexOfLine1()] , i2.getIndexOfLine1() ));
+                    plines.add(new PathLine(i1.getPoint() ,i2.getPoint() ,measures[i2.getIndexOfLine1()] , i2.getIndexOfLine1() ));
                    // Log.i("alaaaaaaaaa" , "33333333333333333 "  );
                     flag = true ;
                 }
                 if((i1.getIndexOfLine1() == i2.getIndexOfLine2()) && (!flag)){
                     pathLines.add(new PathLine(i1.getPoint() ,i2.getPoint(),measures[i2.getIndexOfLine2()] , i2.getIndexOfLine2() ));
+                    plines.add(new PathLine(i1.getPoint() ,i2.getPoint(),measures[i2.getIndexOfLine2()] , i2.getIndexOfLine2() ));
                    // Log.i("alaaaaaaaaa" , "44444444444 "  );
 
                 }
@@ -99,6 +114,7 @@ public class FinalLayoutPath extends View {
                       PathLine p = new PathLine(path1_p2, path2_p2, sizePath, -1);
                       if (!(checkinDiagnole(diagnoleLines, p))) {
                           diagnoleLines.add(p);
+                          plines.add(p);
                           flag = true;
                       }
                   }
@@ -106,6 +122,7 @@ public class FinalLayoutPath extends View {
                       PathLine p = new PathLine(path1_p2, path2_p1, sizePath, -1);
                       if (!(checkinDiagnole(diagnoleLines, p))) {
                           diagnoleLines.add(p);
+                          plines.add(p);
                           flag = true;
                       }
                   }
@@ -113,6 +130,7 @@ public class FinalLayoutPath extends View {
                       PathLine p = new PathLine(path1_p1, path2_p2, sizePath, -1);
                       if (!(checkinDiagnole(diagnoleLines, p))) {
                           diagnoleLines.add(p);
+                          plines.add(p);
                           flag = true;
                       }
                   }
@@ -120,12 +138,56 @@ public class FinalLayoutPath extends View {
                       PathLine p = new PathLine(path1_p1, path2_p1, sizePath, -1);
                       if (!(checkinDiagnole(diagnoleLines, p))) {
                           diagnoleLines.add(p);
+                          plines.add(p);
                       }
                   }
               }
           }
       }
+    public void createResultPath(){
 
+        while (!(plines.isEmpty())){
+            PathLine maxiumPath = plines.get(0);
+            int point = 1 ;
+            for(int i = 0 ; i < plines.size();i++){
+                if(resultPath.size() == 0){
+                if(maxiumPath.getSize() < plines.get(i).getSize()){
+                    maxiumPath = plines.get(i);
+
+                }}
+                else{
+                    if(maxiumPath.getSize() < plines.get(i).getSize()){
+                        PointF p1 = plines.get(i).getPoint1();
+                        PointF p2 = plines.get(i).getPoint2();
+                        if((resultPoints.get(resultPoints.size()-1).equals(p1))){
+                        maxiumPath = plines.get(i);
+                        point = 1 ;
+                    }
+                        else if (resultPoints.get(resultPoints.size()-1).equals(p2)){
+                            maxiumPath = plines.get(i);
+                            point = 2 ;
+                        }
+                        }
+                }
+            }
+            plines.remove(maxiumPath);
+            Log.i("alaa" , "size of pline now" + plines.size());
+            if(resultPath.size() == 0){
+                resultPoints.add(maxiumPath.getPoint1());
+                resultPoints.add(maxiumPath.getPoint2());
+
+            }else {
+                if(point ==1 )
+                resultPoints.add(maxiumPath.getPoint2());
+                if(point == 2)
+                    resultPoints.add(maxiumPath.getPoint1());
+            }
+            resultPath.add(maxiumPath);
+        }
+
+
+
+    }
 public boolean checkinDiagnole(ArrayList<PathLine> p , PathLine x){
         for(int i = 0 ; i < p.size() ; i++){
             if(p.get(i).checkexist(x)){
