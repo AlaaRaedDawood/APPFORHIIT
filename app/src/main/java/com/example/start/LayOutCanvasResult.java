@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-
 import java.util.ArrayList;
 
 public class LayOutCanvasResult extends View {
@@ -21,12 +20,17 @@ public class LayOutCanvasResult extends View {
     private Path path ;
     int selectedLine = -1;
     Boolean checkHandler = false ;
+    private float[] resultMeasure ;
     private ArrayList<Region> regions = new ArrayList<>();
-    private ArrayList<Float> measure=new ArrayList<Float>();;
-    private ArrayList<Float> xstart=new ArrayList<Float>();
-    private ArrayList<Float> ystart=new ArrayList<Float>();
-    private ArrayList<Float> xstop=new ArrayList<Float>();
-    private ArrayList<Float> ystop=new ArrayList<Float>();
+    ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints>();
+    private ArrayList<Integer> donewith = new ArrayList<Integer>();
+    private ArrayList<PointF> intersectPoints = new ArrayList<PointF>();
+    private   ArrayList<PointF> startPoints = new ArrayList<PointF>();
+    private  ArrayList<PointF> stopPoints = new ArrayList<PointF>();
+//    private ArrayList<Float> xstart=new ArrayList<Float>();
+//    private ArrayList<Float> ystart=new ArrayList<Float>();
+//    private ArrayList<Float> xstop=new ArrayList<Float>();
+//    private ArrayList<Float> ystop=new ArrayList<Float>();
     public LayOutCanvasResult(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
@@ -40,11 +44,11 @@ public class LayOutCanvasResult extends View {
         Log.i("alaa" , "done for constructor");
     }
     protected void createRegions(Canvas canvas){
-        for(int i = 0 ; i < xstart.size();i++) {
-            float right = Math.min(xstart.get(i) , xstop.get(i));
-            float left = Math.max(xstart.get(i) , xstop.get(i));
-            float top = Math.min(ystart.get(i) , ystop.get(i));
-            float back = Math.max(ystart.get(i) , ystop.get(i));
+        for(int i = 0 ; i < startPoints.size();i++) {
+            float right = Math.min(startPoints.get(i).getX() , stopPoints.get(i).getX());
+            float left = Math.max(startPoints.get(i).getX() , stopPoints.get(i).getX());
+            float top = Math.min(startPoints.get(i).getY() , stopPoints.get(i).getY());
+            float back = Math.max(startPoints.get(i).getY() , stopPoints.get(i).getY());
             regions.add(new Region((int) (right - 16), (int) (top - 16), (int) (left + 16), (int) (back + 16)));
             paint.setColor(Color.RED);
             canvas.drawRect((float) (right-16) ,(float)(top-16) ,(float)(left
@@ -59,15 +63,16 @@ public class LayOutCanvasResult extends View {
         super.onDraw(canvas);
         if(regions.size() == 0) {
             createRegions(canvas);
+            resultMeasure = new float[startPoints.size()];
         }
        // canvas.drawLine(10,400,400,400,paint);
-        for(int i = 0 ; i < xstart.size();i++){
+        for(int i = 0 ; i < startPoints.size();i++){
             if(i == selectedLine){
                 paint.setColor(Color.RED);
-                canvas.drawLine(xstart.get(i) , ystart.get(i) , xstop.get(i) , ystop.get(i) , paint);
+                canvas.drawLine(startPoints.get(i).getX() , startPoints.get(i).getY() , stopPoints.get(i).getX() , stopPoints.get(i).getY() , paint);
             }else{
                 paint.setColor(Color.BLUE);
-                canvas.drawLine(xstart.get(i) , ystart.get(i) , xstop.get(i) , ystop.get(i) , paint);
+                canvas.drawLine(startPoints.get(i).getX() , startPoints.get(i).getY() , stopPoints.get(i).getX() , stopPoints.get(i).getY() , paint);
             }
 //            paint.setColor(Color.RED);
 //            canvas.drawRect((float) (xstart.get(0)-0.5) ,(float)(ystart.get(0)-0.5) ,(float)(xstop
@@ -128,8 +133,11 @@ public class LayOutCanvasResult extends View {
                                 if (!flag) {
 
                                     float num = Float.parseFloat(text.getText().toString());
-                                    measure.add(num);
+                                    resultMeasure[selectedLine] = num ;
                                     Log.i("alaa", "mabrook  " + num);
+                                    for(int i = 0 ; i < resultMeasure.length ; i++){
+                                        Log.i("alaa", "yrabbbb  " + resultMeasure[i]);
+                                    }
                                     selectedLine = -1 ;
                                     alert.dismiss();
 
@@ -150,18 +158,28 @@ public class LayOutCanvasResult extends View {
         return true ;
     }
 
-    public void setXstart(ArrayList<Float> x){
-        xstart = x;
+//    public void setXstart(ArrayList<Float> x){
+//        xstart = x;
+//
+//    }
+//    public void setYstart(ArrayList<Float> x){
+//         ystart = x;
+//    }
+//    public void setXstop(ArrayList<Float> x){
+//         xstop = x;
+//    }
+//    public void setYstop(ArrayList<Float> x){
+//        ystop = x;
+//    }
+    public void setStartPoints(ArrayList<PointF> x){
+        startPoints = x ;
+    }
+    public void setStopPoints(ArrayList<PointF> x){
+        stopPoints = x ;
+    }
 
-    }
-    public void setYstart(ArrayList<Float> x){
-         ystart = x;
-    }
-    public void setXstop(ArrayList<Float> x){
-         xstop = x;
-    }
-    public void setYstop(ArrayList<Float> x){
-        ystop = x;
+    public float[] getResultMeasure(){
+        return resultMeasure ;
     }
 
 }
