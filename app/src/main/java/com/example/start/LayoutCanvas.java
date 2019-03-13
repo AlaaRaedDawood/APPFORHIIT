@@ -48,7 +48,6 @@ ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints>();
 //        }
 //
 //        Log.i("alaa" , "done for draw ");
-        Log.i("alaat" ,"intersect " + intersect.size());
         for(int i = 0 ; i < startPoints.size();i++){
             canvas.drawLine(startPoints.get(i).getX() , startPoints.get(i).getY() , stopPoints.get(i).getX(), stopPoints.get(i).getY() , paint);
         }
@@ -57,7 +56,6 @@ ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints>();
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.i("alaa" , "done for 5ra");
         float xPos = event.getX();
         float yPos = event.getY();
         switch (event.getAction()) {
@@ -91,7 +89,7 @@ ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints>();
                 if(intersectPoints.size() != 0){
                     for(int i = 0 ; i < donewith.size();i++){
                         PointF intersecttP = intersectPoints.get((intersectPoints.size()-1)-i);
-                        intersect.add(new IntersectedPoints(intersecttP, startPoints.size()-1 ,donewith.get(i)));
+                        intersect.add(new IntersectedPoints(intersecttP, startPoints.size()-1 ,donewith.get((donewith.size()-1)-i)));
                     }}
                 donewith.clear();
                 break;

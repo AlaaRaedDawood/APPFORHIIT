@@ -22,6 +22,9 @@ public class PathLine {
     public float getSize(){
         return size ;
     }
+    public int getLineid(){
+        return lineId ;
+    }
     public void setChecked (boolean f){
         checked = f ;
     }

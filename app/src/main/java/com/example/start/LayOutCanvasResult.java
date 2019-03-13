@@ -19,18 +19,12 @@ public class LayOutCanvasResult extends View {
     private Paint paint ;
     private Path path ;
     int selectedLine = -1;
-    Boolean checkHandler = false ;
+   private boolean checkHandler = false ;
     private float[] resultMeasure ;
     private ArrayList<Region> regions = new ArrayList<>();
-    ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints>();
-    private ArrayList<Integer> donewith = new ArrayList<Integer>();
-    private ArrayList<PointF> intersectPoints = new ArrayList<PointF>();
     private   ArrayList<PointF> startPoints = new ArrayList<PointF>();
     private  ArrayList<PointF> stopPoints = new ArrayList<PointF>();
-//    private ArrayList<Float> xstart=new ArrayList<Float>();
-//    private ArrayList<Float> ystart=new ArrayList<Float>();
-//    private ArrayList<Float> xstop=new ArrayList<Float>();
-//    private ArrayList<Float> ystop=new ArrayList<Float>();
+
     public LayOutCanvasResult(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();

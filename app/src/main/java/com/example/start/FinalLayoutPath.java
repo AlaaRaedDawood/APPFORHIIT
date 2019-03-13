@@ -43,16 +43,34 @@ public class FinalLayoutPath extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if(startPoints.size() != 0 ){
-//            for(int i = 0 ; i < intersectPoints.size() ;i++){
-//                Log.i("alaaa" , " i1 = " + intersectPoints.get(i).getIndexOfLine1() + "l2 = " + intersectPoints.get(i).getIndexOfLine2());
-//            }
+            for(int i = 0 ; i < intersectPoints.size() ;i++){
+                Log.i("alaaa" , " i1 = " + intersectPoints.get(i).getPoint().getX() + "l2 = " + intersectPoints.get(i).getPoint().getY());
+                Log.i("alaa" , "l1 "+ intersectPoints.get(i).getIndexOfLine1() + " l2 = " + intersectPoints.get(i).getIndexOfLine2());
+            }
             checkLinePath();
             Log.i("alaa" , "number of paths are " + pathLines.size());
             if(pathLines.size() != 0) {
                 checkDiagnolePath();
-                Log.i("alaa" , "number of diagnoles are " + diagnoleLines.size());
+//                for(int i = 0 ; i < pathLines.size() ; i++) {
+//                    Log.i("alaa", "p1 x= " + pathLines.get(i).getPoint1().getX() +" y = "+ pathLines.get(i).getPoint1().getY());
+//                    Log.i("alaa", "p2 x= " + pathLines.get(i).getPoint2().getX() +" y = "+ pathLines.get(i).getPoint2().getY());
+//                    Log.i("alaa" , "line id = " +pathLines.get(i).getLineid()  );
+//                }
+                for(int i = 0 ; i < diagnoleLines.size() ; i++) {
+                    Log.i("alaa", "d1 x= " + diagnoleLines.get(i).getPoint1().getX() +" y = "+ diagnoleLines.get(i).getPoint1().getY());
+                    Log.i("alaa", "d2 x= " + diagnoleLines.get(i).getPoint2().getX() +" y = "+ diagnoleLines.get(i).getPoint2().getY());
+                }
                 createResultPath();
                 for(int i = 0 ; i <resultPoints.size() ;i++){
+
+                    String index  = Integer.toString( i );
+                    int d = 20 ;
+                    if(i < 4) {
+                        paint.setTextSize(70);
+                        paint.setColor(Color.GREEN);
+                        canvas.drawText(index, resultPoints.get(i).getX()+ d, resultPoints.get(i).getY(), paint);
+
+                    }
                     paint.setColor(Color.GRAY);
                     canvas.drawCircle(resultPoints.get(i).getX() , resultPoints.get(i).getY() ,40 , paint);
                     Log.i("alaa" , "the x = " + resultPoints.get(i).getX() + " y = " + resultPoints.get(i).getY() );
@@ -77,25 +95,43 @@ public class FinalLayoutPath extends View {
                     pathLines.add(new PathLine(i1.getPoint() ,i2.getPoint(),measures[i2.getIndexOfLine1()] , i2.getIndexOfLine1() ));
                     plines.add(new PathLine(i1.getPoint() ,i2.getPoint(),measures[i2.getIndexOfLine1()] , i2.getIndexOfLine1() ));
                     flag = true ;
-                   // Log.i("alaaaaaaaaa" , "1111111111111111 "  );
+                    int ii = pathLines.size()-1;
+                    Log.i("alaa", "p1 x= " + pathLines.get(ii).getPoint1().getX() +" y = "+ pathLines.get(ii).getPoint1().getY());
+                    Log.i("alaa", "p2 x= " + pathLines.get(ii).getPoint2().getX() +" y = "+ pathLines.get(ii).getPoint2().getY());
+                    Log.i("alaa" , "line id = " +pathLines.get(ii).getLineid()  );
+
+                    Log.i("alaaaaaaaaa" , "1111111111111111 "  );
                 }
             if((i1.getIndexOfLine2() == i2.getIndexOfLine2()) && (!flag)){
              pathLines.add(new PathLine(i1.getPoint() ,i2.getPoint() ,measures[i2.getIndexOfLine2()] , i2.getIndexOfLine2() ));
                 plines.add(new PathLine(i1.getPoint() ,i2.getPoint() ,measures[i2.getIndexOfLine2()] , i2.getIndexOfLine2() ));
-               flag = true ;
-              //  Log.i("alaaaaaaaaa" , "222222222222222 "  );
+
+                flag = true ;
+                int ii = pathLines.size()-1;
+                Log.i("alaa", "p1 x= " + pathLines.get(ii).getPoint1().getX() +" y = "+ pathLines.get(ii).getPoint1().getY());
+                Log.i("alaa", "p2 x= " + pathLines.get(ii).getPoint2().getX() +" y = "+ pathLines.get(ii).getPoint2().getY());
+                Log.i("alaa" , "line id = " +pathLines.get(ii).getLineid()  );
+               Log.i("alaaaaaaaaa" , "222222222222222 "  );
                   }
 
                 if((i1.getIndexOfLine2() == i2.getIndexOfLine1()) && (!flag)){
                     pathLines.add(new PathLine(i1.getPoint() ,i2.getPoint() ,measures[i2.getIndexOfLine1()] , i2.getIndexOfLine1() ));
                     plines.add(new PathLine(i1.getPoint() ,i2.getPoint() ,measures[i2.getIndexOfLine1()] , i2.getIndexOfLine1() ));
-                   // Log.i("alaaaaaaaaa" , "33333333333333333 "  );
+                    int ii = pathLines.size()-1;
+                    Log.i("alaa", "p1 x= " + pathLines.get(ii).getPoint1().getX() +" y = "+ pathLines.get(ii).getPoint1().getY());
+                    Log.i("alaa", "p2 x= " + pathLines.get(ii).getPoint2().getX() +" y = "+ pathLines.get(ii).getPoint2().getY());
+                    Log.i("alaa" , "line id = " +pathLines.get(ii).getLineid()  );
+                    Log.i("alaaaaaaaaa" , "33333333333333333 "  );
                     flag = true ;
                 }
                 if((i1.getIndexOfLine1() == i2.getIndexOfLine2()) && (!flag)){
                     pathLines.add(new PathLine(i1.getPoint() ,i2.getPoint(),measures[i2.getIndexOfLine2()] , i2.getIndexOfLine2() ));
                     plines.add(new PathLine(i1.getPoint() ,i2.getPoint(),measures[i2.getIndexOfLine2()] , i2.getIndexOfLine2() ));
-                   // Log.i("alaaaaaaaaa" , "44444444444 "  );
+                    int ii = pathLines.size()-1;
+                    Log.i("alaa", "p1 x= " + pathLines.get(ii).getPoint1().getX() +" y = "+ pathLines.get(ii).getPoint1().getY());
+                    Log.i("alaa", "p2 x= " + pathLines.get(ii).getPoint2().getX() +" y = "+ pathLines.get(ii).getPoint2().getY());
+                    Log.i("alaa" , "line id = " +pathLines.get(ii).getLineid()  );
+                    Log.i("alaaaaaaaaa" , "44444444444 "  );
 
                 }
             }
@@ -146,7 +182,7 @@ public class FinalLayoutPath extends View {
       }
     public void createResultPath(){
 
-        while (!(plines.isEmpty())){
+        while (resultPath.size() < pathLines.size()){
             PathLine maxiumPath = plines.get(0);
             int point = 1 ;
             for(int i = 0 ; i < plines.size();i++){
@@ -154,8 +190,23 @@ public class FinalLayoutPath extends View {
                 if(maxiumPath.getSize() < plines.get(i).getSize()){
                     maxiumPath = plines.get(i);
 
-                }}
+                }
+                }
                 else{
+                    for(int k = 0 ; k < plines.size() ; k++){
+                        PointF p1 = plines.get(k).getPoint1();
+                        PointF p2 = plines.get(k).getPoint2();
+                        if((resultPoints.get(resultPoints.size()-1).equals(p1))){
+                            maxiumPath = plines.get(k);
+                            point = 1 ;
+                            break;
+                        }
+                        else if (resultPoints.get(resultPoints.size()-1).equals(p2)){
+                            maxiumPath = plines.get(k);
+                            point = 2 ;
+                            break;
+                        }
+                    }
                     if(maxiumPath.getSize() < plines.get(i).getSize()){
                         PointF p1 = plines.get(i).getPoint1();
                         PointF p2 = plines.get(i).getPoint2();
@@ -177,11 +228,14 @@ public class FinalLayoutPath extends View {
                 resultPoints.add(maxiumPath.getPoint2());
 
             }else {
-                if(point ==1 )
-                resultPoints.add(maxiumPath.getPoint2());
-                if(point == 2)
+                if(point == 1 ) {
+                    resultPoints.add(maxiumPath.getPoint2());
+                }
+                if(point == 2) {
                     resultPoints.add(maxiumPath.getPoint1());
+                }
             }
+            Log.i("alaa" , "point1 = " + maxiumPath.getPoint1().getX()  +" p2 = " + maxiumPath.getPoint2().getX() + " size = " +maxiumPath.getSize());
             resultPath.add(maxiumPath);
         }
 
