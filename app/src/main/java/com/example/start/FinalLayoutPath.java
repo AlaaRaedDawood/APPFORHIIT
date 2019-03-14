@@ -65,7 +65,7 @@ public class FinalLayoutPath extends View {
 
                     String index  = Integer.toString( i );
                     int d = 20 ;
-                    if(i < 4) {
+                    if(i < pathLines.size()) {
                         paint.setTextSize(70);
                         paint.setColor(Color.GREEN);
                         canvas.drawText(index, resultPoints.get(i).getX()+ d, resultPoints.get(i).getY(), paint);
@@ -196,12 +196,12 @@ public class FinalLayoutPath extends View {
                     for(int k = 0 ; k < plines.size() ; k++){
                         PointF p1 = plines.get(k).getPoint1();
                         PointF p2 = plines.get(k).getPoint2();
-                        if((resultPoints.get(resultPoints.size()-1).equals(p1))){
+                        if((resultPoints.get(resultPoints.size()-1).equals(p1)) && (!p2.getChecked())){
                             maxiumPath = plines.get(k);
                             point = 1 ;
                             break;
                         }
-                        else if (resultPoints.get(resultPoints.size()-1).equals(p2)){
+                        else if ((resultPoints.get(resultPoints.size()-1).equals(p2)) && (!p1.getChecked()) ){
                             maxiumPath = plines.get(k);
                             point = 2 ;
                             break;
@@ -210,11 +210,11 @@ public class FinalLayoutPath extends View {
                     if(maxiumPath.getSize() < plines.get(i).getSize()){
                         PointF p1 = plines.get(i).getPoint1();
                         PointF p2 = plines.get(i).getPoint2();
-                        if((resultPoints.get(resultPoints.size()-1).equals(p1))){
+                        if((resultPoints.get(resultPoints.size()-1).equals(p1))&& (!p2.getChecked())){
                         maxiumPath = plines.get(i);
                         point = 1 ;
                     }
-                        else if (resultPoints.get(resultPoints.size()-1).equals(p2)){
+                        else if ((resultPoints.get(resultPoints.size()-1).equals(p2))&& (!p1.getChecked())){
                             maxiumPath = plines.get(i);
                             point = 2 ;
                         }
@@ -224,14 +224,18 @@ public class FinalLayoutPath extends View {
             plines.remove(maxiumPath);
             Log.i("alaa" , "size of pline now" + plines.size());
             if(resultPath.size() == 0){
+                maxiumPath.getPoint1().setChecked(true);
+                maxiumPath.getPoint2().setChecked(true);
                 resultPoints.add(maxiumPath.getPoint1());
                 resultPoints.add(maxiumPath.getPoint2());
 
             }else {
                 if(point == 1 ) {
+                    maxiumPath.getPoint2().setChecked(true);
                     resultPoints.add(maxiumPath.getPoint2());
                 }
                 if(point == 2) {
+                    maxiumPath.getPoint1().setChecked(true);
                     resultPoints.add(maxiumPath.getPoint1());
                 }
             }
