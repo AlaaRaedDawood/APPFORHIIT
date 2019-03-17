@@ -21,6 +21,8 @@ public class FinalLayoutPath extends View {
     private float[] measures ;
     ArrayList<PointF> resultPoints = new ArrayList<PointF>();
     private ArrayList<PathLine> resultPath = new ArrayList<PathLine>();
+    ArrayList<Region> regions = new ArrayList<Region>();
+    int createRegion = 0 ;
     private ArrayList<PathLine> diagnoleLines = new ArrayList<PathLine>();
     ArrayList<IntersectedPoints> intersectPoints = new ArrayList<IntersectedPoints>();
     private   ArrayList<PointF> startPoints = new ArrayList<PointF>();
@@ -72,9 +74,16 @@ public class FinalLayoutPath extends View {
 
                     }
                     paint.setColor(Color.GRAY);
-                    canvas.drawCircle(resultPoints.get(i).getX() , resultPoints.get(i).getY() ,40 , paint);
+                    for(int radius = 0 ; radius < 41 ; radius++) {
+                        canvas.drawCircle(resultPoints.get(i).getX(), resultPoints.get(i).getY(), radius, paint);
+                    }
+                    if(createRegion == 0) {
+                        regions.add(new Region((int) (resultPoints.get(i).getX() - 40), (int) (resultPoints.get(i).getY() - 40), (int) (resultPoints.get(i).getX() + 40), (int) (resultPoints.get(i).getY() + 40)));
+                    }
                     Log.i("alaa" , "the x = " + resultPoints.get(i).getX() + " y = " + resultPoints.get(i).getY() );
-                }
+                    createRegion += 1 ;
+                    }
+
                // Log.i("alaa" ,"  the ssssssssssss  "  + resultPath.size());
             }
         }
@@ -83,7 +92,26 @@ public class FinalLayoutPath extends View {
                 canvas.drawLine(startPoints.get(i).getX() , startPoints.get(i).getY() , stopPoints.get(i).getX() , stopPoints.get(i).getY() , paint);
             }
 
-        Log.i("alaa" , "done for draw ");
+        Log.i("alaa" , "done for drawwwwwwwwwwwww " + regions.size());
+
+    }   public boolean onTouchEvent(MotionEvent event) {
+        int xPos = (int) event.getX();
+        int yPos = (int)  event.getY();
+        // Log.i("alaa" , "done for 5ra");
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            for(int i = 0 ;i< regions.size();i++){
+            if (regions.get(i).contains(xPos, yPos)) {
+                Log.i("alaa" , "region is selected" );
+
+            }}
+
+
+        }
+
+        invalidate();
+
+
+        return true ;
     }
     public void checkLinePath(){
         for(int i = 0 ; i< intersectPoints.size();i++){
