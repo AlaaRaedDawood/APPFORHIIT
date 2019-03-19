@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class FinalLayoutPath extends View {
     private Paint paint ;
     private float[] measures ;
+   private int repeatDrawing = 0 ;
     ArrayList<PointF> resultPoints = new ArrayList<PointF>();
     private ArrayList<PathLine> resultPath = new ArrayList<PathLine>();
     ArrayList<Region> regions = new ArrayList<Region>();
@@ -44,25 +45,29 @@ public class FinalLayoutPath extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(startPoints.size() != 0 ){
+        if(startPoints.size() != 0){
             for(int i = 0 ; i < intersectPoints.size() ;i++){
                 Log.i("alaaa" , " i1 = " + intersectPoints.get(i).getPoint().getX() + "l2 = " + intersectPoints.get(i).getPoint().getY());
                 Log.i("alaa" , "l1 "+ intersectPoints.get(i).getIndexOfLine1() + " l2 = " + intersectPoints.get(i).getIndexOfLine2());
             }
-            checkLinePath();
+            if(repeatDrawing == 0) {
+                checkLinePath();
+            }
             Log.i("alaa" , "number of paths are " + pathLines.size());
             if(pathLines.size() != 0) {
-                checkDiagnolePath();
+                if(repeatDrawing == 0) {
+                    checkDiagnolePath();
 //                for(int i = 0 ; i < pathLines.size() ; i++) {
 //                    Log.i("alaa", "p1 x= " + pathLines.get(i).getPoint1().getX() +" y = "+ pathLines.get(i).getPoint1().getY());
 //                    Log.i("alaa", "p2 x= " + pathLines.get(i).getPoint2().getX() +" y = "+ pathLines.get(i).getPoint2().getY());
 //                    Log.i("alaa" , "line id = " +pathLines.get(i).getLineid()  );
 //                }
-                for(int i = 0 ; i < diagnoleLines.size() ; i++) {
-                    Log.i("alaa", "d1 x= " + diagnoleLines.get(i).getPoint1().getX() +" y = "+ diagnoleLines.get(i).getPoint1().getY());
-                    Log.i("alaa", "d2 x= " + diagnoleLines.get(i).getPoint2().getX() +" y = "+ diagnoleLines.get(i).getPoint2().getY());
+                    for (int i = 0; i < diagnoleLines.size(); i++) {
+                        Log.i("alaa", "d1 x= " + diagnoleLines.get(i).getPoint1().getX() + " y = " + diagnoleLines.get(i).getPoint1().getY());
+                        Log.i("alaa", "d2 x= " + diagnoleLines.get(i).getPoint2().getX() + " y = " + diagnoleLines.get(i).getPoint2().getY());
+                    }
+                    createResultPath();
                 }
-                createResultPath();
                 for(int i = 0 ; i <resultPoints.size() ;i++){
 
                     String index  = Integer.toString( i );
@@ -81,10 +86,11 @@ public class FinalLayoutPath extends View {
                         regions.add(new Region((int) (resultPoints.get(i).getX() - 40), (int) (resultPoints.get(i).getY() - 40), (int) (resultPoints.get(i).getX() + 40), (int) (resultPoints.get(i).getY() + 40)));
                     }
                     Log.i("alaa" , "the x = " + resultPoints.get(i).getX() + " y = " + resultPoints.get(i).getY() );
-                    createRegion += 1 ;
-                    }
 
-               // Log.i("alaa" ,"  the ssssssssssss  "  + resultPath.size());
+                    }
+                    repeatDrawing ++ ;
+                createRegion += 1 ;
+               Log.i("alaat" ,"  the ssssssssssss  "  + regions.size());
             }
         }
         for(int i = 0 ; i < startPoints.size();i++){
@@ -101,8 +107,8 @@ public class FinalLayoutPath extends View {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             for(int i = 0 ;i< regions.size();i++){
             if (regions.get(i).contains(xPos, yPos)) {
-                Log.i("alaa" , "region is selected" );
-
+                Log.i("region" , "region is selected" + i);
+                break;
             }}
 
 
