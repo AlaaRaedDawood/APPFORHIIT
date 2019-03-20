@@ -45,17 +45,17 @@ public class FinalLayoutPath extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(startPoints.size() != 0){
-            for(int i = 0 ; i < intersectPoints.size() ;i++){
-                Log.i("alaaa" , " i1 = " + intersectPoints.get(i).getPoint().getX() + "l2 = " + intersectPoints.get(i).getPoint().getY());
-                Log.i("alaa" , "l1 "+ intersectPoints.get(i).getIndexOfLine1() + " l2 = " + intersectPoints.get(i).getIndexOfLine2());
+        if (startPoints.size() != 0) {
+            for (int i = 0; i < intersectPoints.size(); i++) {
+                Log.i("alaaa", " i1 = " + intersectPoints.get(i).getPoint().getX() + "l2 = " + intersectPoints.get(i).getPoint().getY());
+                Log.i("alaa", "l1 " + intersectPoints.get(i).getIndexOfLine1() + " l2 = " + intersectPoints.get(i).getIndexOfLine2());
             }
-            if(repeatDrawing == 0) {
+            if (repeatDrawing == 0) {
                 checkLinePath();
             }
-            Log.i("alaa" , "number of paths are " + pathLines.size());
-            if(pathLines.size() != 0) {
-                if(repeatDrawing == 0) {
+            Log.i("alaa", "number of paths are " + pathLines.size());
+            if (pathLines.size() != 0) {
+                if (repeatDrawing == 0) {
                     checkDiagnolePath();
 //                for(int i = 0 ; i < pathLines.size() ; i++) {
 //                    Log.i("alaa", "p1 x= " + pathLines.get(i).getPoint1().getX() +" y = "+ pathLines.get(i).getPoint1().getY());
@@ -68,57 +68,57 @@ public class FinalLayoutPath extends View {
                     }
                     createResultPath();
                 }
-                for(int i = 0 ; i <resultPoints.size() ;i++){
+                for (int i = 0; i < resultPoints.size(); i++) {
 
-                    String index  = Integer.toString( i );
-                    int d = 20 ;
-                    if(i < pathLines.size()) {
+                    String index = Integer.toString(i);
+                    int d = 20;
+                    if (i < pathLines.size()) {
                         paint.setTextSize(70);
                         paint.setColor(Color.GREEN);
-                        canvas.drawText(index, resultPoints.get(i).getX()+ d, resultPoints.get(i).getY(), paint);
+                        canvas.drawText(index, resultPoints.get(i).getX() + d, resultPoints.get(i).getY(), paint);
 
                     }
                     paint.setColor(Color.GRAY);
-                    for(int radius = 0 ; radius < 41 ; radius++) {
+                    for (int radius = 0; radius < 41; radius++) {
                         canvas.drawCircle(resultPoints.get(i).getX(), resultPoints.get(i).getY(), radius, paint);
                     }
-                    if(createRegion == 0) {
+                    if (createRegion == 0) {
                         regions.add(new Region((int) (resultPoints.get(i).getX() - 40), (int) (resultPoints.get(i).getY() - 40), (int) (resultPoints.get(i).getX() + 40), (int) (resultPoints.get(i).getY() + 40)));
                     }
-                    Log.i("alaa" , "the x = " + resultPoints.get(i).getX() + " y = " + resultPoints.get(i).getY() );
+                    Log.i("alaa", "the x = " + resultPoints.get(i).getX() + " y = " + resultPoints.get(i).getY());
 
-                    }
-                    repeatDrawing ++ ;
-                createRegion += 1 ;
-               Log.i("alaat" ,"  the ssssssssssss  "  + regions.size());
+                }
+                repeatDrawing++;
+                createRegion += 1;
+                Log.i("alaat", "  the ssssssssssss  " + regions.size());
             }
         }
-        for(int i = 0 ; i < startPoints.size();i++){
+        for (int i = 0; i < startPoints.size(); i++) {
             paint.setColor(Color.BLUE);
-                canvas.drawLine(startPoints.get(i).getX() , startPoints.get(i).getY() , stopPoints.get(i).getX() , stopPoints.get(i).getY() , paint);
-            }
-
-        Log.i("alaa" , "done for drawwwwwwwwwwwww " + regions.size());
-
-    }   public boolean onTouchEvent(MotionEvent event) {
-        int xPos = (int) event.getX();
-        int yPos = (int)  event.getY();
-        // Log.i("alaa" , "done for 5ra");
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            for(int i = 0 ;i< regions.size();i++){
-            if (regions.get(i).contains(xPos, yPos)) {
-                Log.i("region" , "region is selected" + i);
-                break;
-            }}
-
-
+            canvas.drawLine(startPoints.get(i).getX(), startPoints.get(i).getY(), stopPoints.get(i).getX(), stopPoints.get(i).getY(), paint);
         }
 
-        invalidate();
-
-
-        return true ;
+        Log.i("alaa", "done for drawwwwwwwwwwwww " + regions.size());
     }
+//    }   public boolean onTouchEvent(MotionEvent event) {
+//        int xPos = (int) event.getX();
+//        int yPos = (int)  event.getY();
+//        // Log.i("alaa" , "done for 5ra");
+//        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//            for(int i = 0 ;i< regions.size();i++){
+//            if (regions.get(i).contains(xPos, yPos)) {
+//                Log.i("region" , "region is selected" + i);
+//                break;
+//            }}
+//
+//
+//        }
+//
+//        //invalidate();
+//
+//
+//        return true ;
+//    }
     public void checkLinePath(){
         for(int i = 0 ; i< intersectPoints.size();i++){
             for(int j = i+1 ; j <intersectPoints.size();j++){
@@ -301,6 +301,8 @@ public boolean checkinDiagnole(ArrayList<PathLine> p , PathLine x){
     public void setMeasures(float[] x){
         measures = x ;
     }
-
+    public ArrayList<Region> getRegions(){
+        return regions;
+    }
 
 }
