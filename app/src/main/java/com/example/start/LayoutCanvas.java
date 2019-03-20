@@ -17,12 +17,7 @@ import java.util.ArrayList;
 
 public class LayoutCanvas extends View {
     private Paint paint ;
-//    private ArrayList<Integer> measure=new ArrayList<Integer>();;
-//    private ArrayList<Float> xstart=new ArrayList<Float>();
-//    private ArrayList<Float> ystart=new ArrayList<Float>();
-//    private ArrayList<Float> xstop=new ArrayList<Float>();
-//    private ArrayList<Float> ystop=new ArrayList<Float>();
-ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints>();
+private ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints>();
     private ArrayList<Integer> donewith = new ArrayList<Integer>();
     private ArrayList<PointF> intersectPoints = new ArrayList<PointF>();
   private   ArrayList<PointF> startPoints = new ArrayList<PointF>();
@@ -73,10 +68,11 @@ ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints>();
                     boolean flagX3 = (Math.max(startPoint.getX(),xPos) - Math.min(startPoint.getX(),xPos) < 14);
                     boolean flag1 = (Math.max(stopPoint.getY(),yPos) - Math.min(stopPoint.getY(),yPos) < 14);
                     boolean flag2 = (Math.max(startPoint.getY(),yPos) - Math.min(startPoint.getY(),yPos) < 14);
+                    boolean flag3 = (yPos >= Math.min( startPoint.getY(),stopPoint.getY())) && (yPos <= Math.max( startPoint.getY(),stopPoint.getY()));
 
                     if(!(donewith.contains(i))){
                         if( flagX1 ||flagX2 || flagX3 ){
-                            if(flag1 || flag2){
+                            if(flag1 || flag2 || flag3){
                                 Log.i("alaat" , "intersection at x =   " + xPos + "y =" + yPos + "with line " + i);
                                 intersectPoints.add(new PointF(xPos ,yPos));
                                 donewith.add(i);

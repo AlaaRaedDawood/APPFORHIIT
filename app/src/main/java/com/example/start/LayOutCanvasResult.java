@@ -14,11 +14,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import java.util.ArrayList;
-
+///canvas for taking measures
 public class LayOutCanvasResult extends View {
     private Paint paint ;
     private Path path ;
-    int selectedLine = -1;
+    private int selectedLine = -1;
    private boolean checkHandler = false ;
     private float[] resultMeasure ;
     private ArrayList<Region> regions = new ArrayList<>();
@@ -78,7 +78,7 @@ public class LayOutCanvasResult extends View {
     }
 
 
-
+//onTouch we get to know which line was selected
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int xPos = (int) event.getX();
@@ -127,8 +127,10 @@ public class LayOutCanvasResult extends View {
                                 if (!flag) {
 
                                     float num = Float.parseFloat(text.getText().toString());
-                                    resultMeasure[selectedLine] = num ;
-                                    Log.i("alaa", "mabrook  " + num);
+                                    if(selectedLine != -1) {
+                                        resultMeasure[selectedLine] = num;
+                                    }
+                                   // Log.i("alaa", "mabrook  " + num);
                                     for(int i = 0 ; i < resultMeasure.length ; i++){
                                         Log.i("alaa", "yrabbbb  " + resultMeasure[i]);
                                     }
@@ -146,10 +148,12 @@ public class LayOutCanvasResult extends View {
                 }, 500);
    checkHandler = false;
             }
+            invalidate();
+            return true ;
         }
        // return super.onTouchEvent(event);
-        invalidate();
-        return true ;
+
+        return false ;
     }
 
 //    public void setXstart(ArrayList<Float> x){
