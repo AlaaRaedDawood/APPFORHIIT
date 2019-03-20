@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class targetPosition extends View {
     private Paint paint ;
+    private int targetIndex = -1 ;
+    private int targetSize = -1 ;
     private boolean showTarget = false;
     public targetPosition(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -54,12 +56,21 @@ public class targetPosition extends View {
             canvas.drawCircle(506, 550, i, paint);
         }
         paint.setColor(Color.GREEN);
+            paint.setTextSize(80);
+        canvas.drawText("5 cm", 506 , 400, paint);
+            paint.setTextSize(50);
+            if((targetIndex != -1) && (targetSize != 0)) {
 
+                canvas.drawText(Integer.toString(targetIndex), 506, 250, paint);
+                canvas.drawText(Integer.toString(targetIndex + targetSize), 506, 550, paint);
+            }
         canvas.drawRect((float) 456, (float) 500, (float) 556, (float) 600, paint);
         canvas.drawRect((float) 456, (float) 200, (float) 556, (float) 300, paint);
     }}
-    public void setShowTarget(){
+    public void setShowTarget(int index , int regionSize){
         showTarget = true ;
+        targetIndex = index ;
+        targetSize = regionSize ;
         invalidate();
     }
 }

@@ -301,8 +301,10 @@ public boolean checkinDiagnole(ArrayList<PathLine> p , PathLine x){
     public void setMeasures(float[] x){
         measures = x ;
     }
-    public ArrayList<Region> getRegions(){
+    public ArrayList<Region> getRegions() {
         return regions;
     }
-
+    public int getSize(){
+        return pathLines.size();
+    }
 }

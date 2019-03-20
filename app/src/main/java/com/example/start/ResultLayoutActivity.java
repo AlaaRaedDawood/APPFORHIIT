@@ -38,7 +38,7 @@ public class ResultLayoutActivity extends AppCompatActivity {
                     Log.i("region" , "SIZZZZZZEE sucess" + regions.size());
             for(int i = 0 ;i< regions.size();i++){
            if (regions.get(i).contains(xPos, yPos)) {
-               targetWall.setShowTarget();
+               targetWall.setShowTarget(i , canvas.getSize());
                Log.i("region" , "region is selected" + i);
               break;
             }}
