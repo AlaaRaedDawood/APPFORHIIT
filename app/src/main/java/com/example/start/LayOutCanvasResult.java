@@ -33,7 +33,7 @@ public class LayOutCanvasResult extends View {
         paint.setColor(Color.BLUE);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(5f);
+        paint.setStrokeWidth(9f);
 
         Log.i("alaa" , "done for constructor");
     }
@@ -45,8 +45,8 @@ public class LayOutCanvasResult extends View {
             float back = Math.max(startPoints.get(i).getY() , stopPoints.get(i).getY());
             regions.add(new Region((int) (right - 16), (int) (top - 16), (int) (left + 16), (int) (back + 16)));
             paint.setColor(Color.RED);
-            canvas.drawRect((float) (right-16) ,(float)(top-16) ,(float)(left
-                  +16 ),(float)(back+16) ,paint);
+//            canvas.drawRect((float) (right-16) ,(float)(top-16) ,(float)(left
+//                  +16 ),(float)(back+16) ,paint);
             paint.setColor(Color.BLUE);
 
         }

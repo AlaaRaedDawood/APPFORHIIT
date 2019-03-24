@@ -37,7 +37,7 @@ public class FinalLayoutPath extends View {
         paint.setColor(Color.BLUE);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(5f);
+        paint.setStrokeWidth(8f);
 
         Log.i("alaa" , "done for constructor");
     }

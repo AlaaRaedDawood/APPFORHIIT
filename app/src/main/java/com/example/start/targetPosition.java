@@ -27,7 +27,7 @@ public class targetPosition extends View {
         paint.setColor(Color.RED);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(5f);
+        paint.setStrokeWidth(8f);
 
         Log.i("alaa" , "done for constructor");
     }
@@ -66,6 +66,7 @@ public class targetPosition extends View {
             }
         canvas.drawRect((float) 456, (float) 500, (float) 556, (float) 600, paint);
         canvas.drawRect((float) 456, (float) 200, (float) 556, (float) 300, paint);
+            paint.setColor(Color.RED);
     }}
     public void setShowTarget(int index , int regionSize){
         showTarget = true ;

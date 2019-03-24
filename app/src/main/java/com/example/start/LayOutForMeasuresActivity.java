@@ -51,7 +51,7 @@ public class LayOutForMeasuresActivity extends AppCompatActivity {
                     }
                 }
                 if(flag){
-                Intent intent = new Intent(LayOutForMeasuresActivity.this, ResultLayoutActivity.class);
+                Intent intent = new Intent(LayOutForMeasuresActivity.this, FinalLayoutResult.class);
                 intent.putExtra("startPoints", startPoints);
                 intent.putExtra("stopPoints", stopPoints);
                 intent.putExtra("intersectedPoints", intersectedPoints);

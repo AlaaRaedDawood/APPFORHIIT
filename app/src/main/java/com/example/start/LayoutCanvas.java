@@ -26,10 +26,10 @@ private ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints
         super(context, attrs);
         paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(Color.RED);
+        paint.setColor(Color.BLUE);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(5f);
+        paint.setStrokeWidth(9f);
 
         Log.i("alaa" , "done for constructor");
     }
@@ -106,6 +106,25 @@ private ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints
     }
     public ArrayList<IntersectedPoints> getIntersectedPoints(){
         return intersect ;
+    }
+    public void resetDrawing(){
+        int size = startPoints.size()-1;
+        ArrayList<Integer> k = new ArrayList<Integer>() ;
+        startPoints.remove(size);
+        stopPoints.remove(size);
+        for(int i=0 ;i<intersect.size();i++){
+            if(intersect.get(i).getIndexOfLine1()==size || intersect.get(i).getIndexOfLine2() ==size){
+                k.add(i);
+
+            }
+        }
+        for(int i =0 ; i<k.size();i++){
+            PointF inters = intersect.get(k.get(i)).getPoint();
+            intersectPoints.remove(inters);
+            intersect.remove(k.get(i));
+
+         }
+
     }
 //
 //    @Override
