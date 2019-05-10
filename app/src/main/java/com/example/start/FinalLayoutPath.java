@@ -15,7 +15,7 @@ public class FinalLayoutPath extends View {
     private float[] measures ;
    private int repeatDrawing = 0 ;
    //add jump height
-    int jumpHeight = 100 ;
+   private int jumpHeight = 110 ;
     //ArrayList<PointF> resultPoints = new ArrayList<PointF>();
     //private ArrayList<PathLine> resultPath = new ArrayList<PathLine>();
     ArrayList<Region> regions = new ArrayList<Region>();
@@ -393,7 +393,12 @@ public boolean checkinDiagnole(ArrayList<PathLine> p , PathLine d){
     public ArrayList<IntersectedPoints> getIntersectPoints() {
         return intersectPoints;
     }
-   public ArrayList<PointF> getIntersectPointF(){
+
+    public void setJumpHeight(int jumpHeight) {
+        this.jumpHeight = jumpHeight;
+    }
+
+    public ArrayList<PointF> getIntersectPointF(){
         ArrayList<PointF> intersectPointF = new ArrayList<PointF>();
         for(int i=0 ; i < intersectPoints.size() ; i++){
            intersectPointF.add(intersectPoints.get(i).getPoint() ) ;

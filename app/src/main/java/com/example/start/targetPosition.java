@@ -55,16 +55,7 @@ public class targetPosition extends View {
             }
             if(backProblems.equals("upper")){
                 //middle line
-//                canvas.drawLine(506, 180, 506, 750, paint);
-//                canvas.drawLine(506, 180, 793, 273, paint);
-//                canvas.drawLine(793, 273, 781, 859, paint);
-//                canvas.drawLine(506, 750, 781, 859, paint);
-//                canvas.drawLine(506, 750, 781, 859, paint);
-//                canvas.drawLine(506, 750, 231, 859, paint);
-//                canvas.drawLine(506, 180, 219, 273, paint);
-//                canvas.drawLine(231, 859, 219, 273, paint);
-//                canvas.drawText(String.valueOf(user_height-110), 506 , 400, paint);
-//                canvas.drawText(String.valueOf(30), 506 , 700, paint);
+
                 canvas.drawLine(506, 80, 506, 840, paint);
                 canvas.drawLine(506, 80, 793, 173, paint);
                 canvas.drawLine(793, 173, 781, 900, paint);

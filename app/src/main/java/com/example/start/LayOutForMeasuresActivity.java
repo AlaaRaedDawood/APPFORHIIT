@@ -1,7 +1,9 @@
 package com.example.start;
 
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static android.arch.lifecycle.ViewModelProviders.of;
 
 public class LayOutForMeasuresActivity extends AppCompatActivity {
 //    ArrayList<Float> xstart ;
@@ -25,14 +30,27 @@ public class LayOutForMeasuresActivity extends AppCompatActivity {
     private Button button_back ;
     private float[] sizes ;
     private int layoutEditID = -1 ;
+    //private HiitViewModel hiitViewModel ;
+    //private int jumpHeight
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //hiitViewModel = of(this).get(HiitViewModel.class);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN , WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_lay_out_for_measures);
         Log.i("alaa" ,"wslmnnnnnnnaaa");
-        final LayOutCanvasResult canvas  = (LayOutCanvasResult) findViewById(R.id.getmeasure_canvas);
+//        hiitViewModel.getAllProfiles().observe(LayOutForMeasuresActivity.this, new Observer<List<ProfileTableDb>>() {
+//            @Override
+//            public void onChanged(@Nullable List<ProfileTableDb> profiles) {
+//                if(profiles.get(0).getUser_backproblems().equals("lower")) {
+//                }
+//                if(profiles.get(0).getUser_backproblems().equals("upper")) {
+//                }
+//                if(profiles.get(0).getUser_backproblems().equals("none")) {
+//                }
+//            }});
+                final LayOutCanvasResult canvas  = (LayOutCanvasResult) findViewById(R.id.getmeasure_canvas);
         final ArrayList<PointF> startPoints =(ArrayList<PointF>)getIntent().getSerializableExtra("startPoints"); ;
         final ArrayList<PointF> stopPoints = (ArrayList<PointF>)getIntent().getSerializableExtra("stopPoints");
         final ArrayList<IntersectedPoints> intersectedPoints = (ArrayList<IntersectedPoints>)getIntent().getSerializableExtra("intersectedPoints");

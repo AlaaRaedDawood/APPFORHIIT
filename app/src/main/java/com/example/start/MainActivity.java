@@ -327,28 +327,37 @@ public class MainActivity extends AppCompatActivity {
                     int age = -1;
                     //int maxheartRate = 0;
                     try {
-                        Log.i("aaaaaaaaaaaaaaaaaaaaaa ", " birthdate is  " + profiles.get(0).getBirthdate());
-                        Date birthdate = new SimpleDateFormat("dd/MM/yyyy").parse(profiles.get(0).getBirthdate());
+                        Log.i("aaaagggeee", " birthdate is  " + profiles.get(0).getBirthdate());
+                        Date birthdate = new SimpleDateFormat("MM/dd/yyyy").parse(profiles.get(0).getBirthdate());
                         Date today = Calendar.getInstance().getTime();
                         Date date; // your date
                         Calendar cal = Calendar.getInstance();
                         // cal.setTime(date);
                         int year = cal.get(Calendar.YEAR);
-                        Log.i("aaaaaaaaaaaaaaaaaa", "cal year is " + year);
-                        Log.i("aaaaaaaaaaaaaaaaaa", "year is " + today.getYear());
-                        Log.i("aaaaaaaaaaaaaaaaaa", "difference year is " + (year - birthdate.getYear()));
+                        Log.i("aaaagggeee", "cal year is " + year);
+                        Log.i("aaaagggeee", "year is " + today.getYear());
+                        Log.i("aaaagggeee", "difference year is " + (year - birthdate.getYear()));
                         int month = cal.get(Calendar.MONTH);
                         int day = cal.get(Calendar.DAY_OF_MONTH);
-                        if (today.getMonth() == birthdate.getMonth()) {
+                        if (today.getMonth()+1 == birthdate.getMonth()+1) {
                             if (today.getDay() < birthdate.getDay()) {
-                                age = (today.getYear() - birthdate.getYear()) ;
+                                Log.i("aaaagggeee","1");
+                                age = (today.getYear() - birthdate.getYear())-1 ;
                             } else {
-                                age = (today.getYear() - birthdate.getYear()) + 1;
+                                Log.i("aaaagggeee","2");
+                                age = (today.getYear() - birthdate.getYear());
                             }
-                        } else if ((today.getMonth() < birthdate.getMonth()) && (age == -1)) {
-                            age = (today.getYear() - birthdate.getYear()) +1 ;
-                        } else if (age == -1) {
-                            age = (today.getYear() - birthdate.getYear())+1;
+                        } else if ((today.getMonth()+1< birthdate.getMonth()+1) && (age == -1)) {
+                            Log.i("aaaagggeee","3" + " t = " + today.getMonth() + " b= " + birthdate.getMonth());
+                            age = (today.getYear() - birthdate.getYear())-1;
+                        }
+                        else if ((today.getMonth()+1 > birthdate.getMonth()+1) && (age == -1)) {
+                            Log.i("aaaagggeee","4" + " t = " + today.getMonth()+1 + " b= " + birthdate.getMonth()+1);
+                        age = (today.getYear() - birthdate.getYear())  ;
+                        }
+                        else if (age == -1) {
+                            Log.i("aaaagggeee","5");
+                            age = (today.getYear() - birthdate.getYear());
                         }
                     } catch (ParseException e) {
                         Log.i("Error", "birthdate was not saved in right format");
@@ -357,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
                     if (age != -1) {
                         if (profiles.get(0).getUser_gender().equals("female")) {
                             maxheartrate = (int) (206.9 - (0.67 * age));
-                            Log.i("aaaaaaaaaaaaaaaaaaaaaa ", "age" + age + " heart rate " + maxheartrate);
+                            Log.i("aaaagggeee", "age" + age + " heart rate " + maxheartrate);
                         } else {
                             maxheartrate = (int) (206.9 - (0.88 * age));
                         }
