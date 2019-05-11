@@ -118,7 +118,7 @@ public class ChooseLayoutActivity extends AppCompatActivity {
                     Log.i("check" , "previous layout = " + checkedTrue.getLayout_name() +
                             " new checked layout = " + layout.getLayout_name());
                      newLayout = new layoutTableDB(checkedTrue.getLayout_name(),checkedTrue.getIntersect(),checkedTrue.getPathLines(),checkedTrue.getIntersectPoints()
-                            ,checkedTrue.getStartPoints(),checkedTrue.getStopPoints(),0);
+                            ,checkedTrue.getStartPoints(),checkedTrue.getStopPoints(),checkedTrue.getTargetTime(),0);
                     newLayout.setId(checkedTrue.getId());
                     hiitViewModel.update(newLayout);
                 }
@@ -126,7 +126,7 @@ public class ChooseLayoutActivity extends AppCompatActivity {
                  int count = 0 ;
 
                 newLayout = new layoutTableDB(layout.getLayout_name(),layout.getIntersect(),layout.getPathLines(),layout.getIntersectPoints()
-                        ,layout.getStartPoints(),layout.getStopPoints(),1);
+                        ,layout.getStartPoints(),layout.getStopPoints(),layout.getTargetTime(),1);
                 newLayout.setId(layout.getId());
                 checkedTrue = newLayout ;
                 Log.i("checked" , "new checked profile " + newLayout.getLayout_name());

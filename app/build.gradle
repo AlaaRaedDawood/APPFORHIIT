@@ -48,5 +48,7 @@ dependencies {
     implementation project(":ARHIIT-release")
     implementation(name: 'heartratee-release', ext: 'aar')
     implementation(name: 'VuforiaWrapper', ext: 'aar')
-
+    //implementing printing library
+    implementation project(':mobileprintsdk')
+    implementation 'com.mcxiaoke.volley:library:1.0.6'
 }

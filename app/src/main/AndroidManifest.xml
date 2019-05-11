@@ -38,7 +38,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".PrintMarkers"
+            android:name=".PrintMarkersActivity"
             android:label="@string/title_activity_print_markers"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

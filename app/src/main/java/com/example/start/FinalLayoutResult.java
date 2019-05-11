@@ -138,7 +138,7 @@ public class FinalLayoutResult extends AppCompatActivity {
 
                                         String layout_title = text.getText().toString();
                                         layoutTableDB layout = new layoutTableDB(layout_title,canvas.getIntersectPoints(),canvas.getPlines() ,canvas.getIntersectPointF(),
-                                                canvas.getStartPointsPoint(), canvas.getStopPointsPoint(),0);
+                                                canvas.getStartPointsPoint(), canvas.getStopPointsPoint(),-1,0);
 
                                         if (layout != null) {
 
@@ -203,7 +203,7 @@ public class FinalLayoutResult extends AppCompatActivity {
 
                                         String layout_title = text.getText().toString();
                                         layoutTableDB layout = new layoutTableDB(layout_title,canvas.getIntersectPoints(),canvas.getPlines() ,canvas.getIntersectPointF(),
-                                                canvas.getStartPointsPoint(), canvas.getStopPointsPoint(),0);
+                                                canvas.getStartPointsPoint(), canvas.getStopPointsPoint(),-1,0);
 
                                         if (layout != null) {
                                             layout.setId(layoutEditID);
