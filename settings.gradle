@@ -1,1 +1,1 @@
-include ':app', ':mylibrary', ':ARHIIT-release', ':mobileprintsdk'
+include ':app', ':mylibrary', ':mobileprintsdk', ':ARHIIT-release'

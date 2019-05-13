@@ -48,7 +48,10 @@ private ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
         paint.setColor(Color.BLUE);
+
+        //PointF repeatedpoint = null ;
         if(drawPoints){
             canvas.drawLine(startX , startY , endX, endY , paint);
         }
@@ -284,10 +287,57 @@ private ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints
             default:
                 return false;
         }
+       checkI();
         invalidate();
 
 
         return true ;
+    }
+    public void checkI(){
+        int repeatedpointindex = -1 ;
+        for(int i = 0 ; i < stopPoints.size();i++){
+            if(startPoints.get(i).getX() == stopPoints.get(i).getX()){
+                if(startPoints.get(i).getY() == stopPoints.get(i).getY()){
+                    repeatedpointindex = i;
+                    Log.i("repeated" ," =================== " + i);
+                }
+            }
+        }
+
+        Log.i("repeated" ," =================== "+ intersectPoints.size()+" =======================" );
+        if(repeatedpointindex != -1){
+            PointF repeatedpoint = stopPoints.get(repeatedpointindex);
+
+            int x = 0;
+            ArrayList<PointF>inn = new  ArrayList<PointF>();
+            for(int i = 0 ; i < intersectPoints.size() ;i++){
+                if((intersectPoints.get(i).getX() == repeatedpoint.getX())&&(intersectPoints.get(i).getY() == repeatedpoint.getY())){
+                    x++;
+                    inn.add(intersectPoints.get(i));
+                   // break;
+                }
+            }
+            for(int i = 0 ; i < inn.size() ; i++){
+                intersectPoints.remove(inn.get(i));
+            }
+           // x = 0 ;
+            ArrayList<IntersectedPoints>in = new  ArrayList<IntersectedPoints>();
+            Log.i("repeated" ," =================== here =======================" );
+            for(int i = 0 ; i < intersect.size() ;i++){
+                if((intersect.get(i).getPoint().getX() == repeatedpoint.getX())&&(intersect.get(i).getPoint().getY() == repeatedpoint.getY())){
+                    in .add(intersect.get(i));
+                   // x++ ;
+                }
+            }
+            for(int i = 0 ; i < in.size() ; i++){
+                intersect.remove(in.get(i));
+            }
+            startPoints.remove(repeatedpointindex);
+            stopPoints.remove(repeatedpointindex);
+        }
+        Log.i("repeated" ," =================== "+ intersectPoints.size()+" =======================" );
+
+
     }
     private void checkIntersection() {
         if(startPoints.size() > 1){

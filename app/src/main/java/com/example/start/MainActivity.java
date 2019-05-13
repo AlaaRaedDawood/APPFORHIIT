@@ -37,15 +37,17 @@ import static android.arch.lifecycle.ViewModelProviders.of;
 
 public class MainActivity extends AppCompatActivity {
     private HiitViewModel hiitViewModel ;
-    private int performanceCount ;
-    private int playButtonClick = -1 ;
+    private int performanceCount = -1 ;
     private layoutTableDB usedLayout ;
     private ArrayList<String> date = new ArrayList<>() ;
     private ArrayList<Integer> heartRate = new ArrayList<>() ;
     private ArrayList<PathLine> layoutpaths = new ArrayList<>() ;
     private int maxheartrate ;
-    private  float targetTimeLimit = -1 ;
+    private int[] hiitRatioplay = {2,2,4,6};
+    private int[] hiitRatiorest = {4,2,2,2};
+    private  float targetTimeLimit  ;
     private  String lastGamePlayedDate = "" ;
+    private   Button buttonPlay ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,18 +60,21 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(3000);
         animationDrawable.start();
+          buttonPlay = (Button)(findViewById(R.id.button_play));
         hiitViewModel.getAllLayouts().observe(MainActivity.this, new Observer<List<layoutTableDB>>() {
             @Override
             public void onChanged(@Nullable List<layoutTableDB> layouts) {
                 for(int i = 0 ; i < layouts.size() ; i++){
                     if(layouts.get(i).getUsed() ==1) {
                         usedLayout = layouts.get(i);
+                        checkPlayButton();
                         Log.i("playButton" , "usedLayout is in index = " + i);
                     }}}});
         final Animation anime_translate = AnimationUtils.loadAnimation(this ,R.anim.anime_translate);
 
         Button buttonPerformance = (Button)(findViewById(R.id.button_performance));
         checkPerformance();
+        checkPerformanceCount();
         buttonPerformance.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -85,9 +90,11 @@ public class MainActivity extends AppCompatActivity {
 
         final Button buttonPrint = (Button)(findViewById(R.id.button_print));
        final Button buttonTrial = (Button)(findViewById(R.id.button_trial));
-       final Button buttonPlay = (Button)(findViewById(R.id.button_play));
-        buttonPlay.setVisibility(View.VISIBLE);
+
         buttonTrial.setVisibility(View.GONE);
+
+
+       // buttonTrial.setVisibility(View.GONE);
 //        hiitViewModel.getPerformanceSize().observe(this , new Observer<Integer>() {
 //            @Override
 //            public void onChanged(@Nullable Integer performanceSize)
@@ -257,6 +264,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    public void checkPlayButton() {
+        if(usedLayout == null){
+            buttonPlay.setVisibility(View.GONE);
+
+        }else if(usedLayout.getTargetTime() == -1){
+            buttonPlay.setVisibility(View.VISIBLE);
+            buttonPlay.setText("TRIAL");
+        }else if(usedLayout.getTargetTime() != -1) {
+            buttonPlay.setVisibility(View.VISIBLE);
+            buttonPlay.setText("Play");
+        }
+    }
+
     private void doTrial(){
         hiitViewModel.getAllLayouts().observe(MainActivity.this, new Observer<List<layoutTableDB>>() {
             @Override
@@ -342,6 +363,7 @@ public class MainActivity extends AppCompatActivity {
                     //profiles.get(0).getBirthdate();
                     Log.i("aaaaaaaaaaaaaaaaaaaaaa " , " point1ID " + point1ID[0]);
                     //view.startAnimation(anime_translate);
+
                     Intent intent = new Intent(MainActivity.this, UnityPlayerActivity.class);
                     intent.putExtra("maxheartRate", maxheartrate);
                     intent.putExtra("point1ID", point1ID);
@@ -350,7 +372,14 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("flag", 1);
                     if(targetTimeLimit != -1) {
                         int t = (int) (targetTimeLimit +1 );
+                        int restTimerLimit = -1 ;
+                        int targetcountLimit = hiitRatioplay[performanceCount] ;
+                        int ratio = hiitRatiorest[performanceCount];
+                        Log.i("playgame" , "r=" + (performanceCount) + " targetcountLimit = " +targetcountLimit + " r ="+restTimerLimit);
+                        restTimerLimit = t*ratio ;
                         intent.putExtra("targetTimerLimit", t);
+                        intent.putExtra("restTimerLimit", restTimerLimit);
+                        intent.putExtra("targetcountLimit", targetcountLimit);
                         startActivityForResult(intent, 1);
                     }
                     else {
@@ -401,15 +430,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    public void checkPerformanceCount(){
-//        hiitViewModel.getPerformanceSize().observe(this , new Observer<Integer>() {
-//            @Override
-//            public void onChanged(@Nullable Integer performanceSize) {
-//                performanceCount = performanceSize ;
-//                Log.i("DB" , "the profile size is " + performanceSize);
-//
-//            }});
-//    }
+    public void checkPerformanceCount(){
+        hiitViewModel.getPerformanceSize().observe(this , new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer performanceSize) {
+               performanceCount = (int)(performanceSize / 7) ;
+
+                Log.i("DB" , "the profile size is " + performanceSize);
+
+            }});
+    }
     public void checkProfile(){
         hiitViewModel.getAllProfiles().observe(MainActivity.this, new Observer<List<ProfileTableDb>>() {
             @Override
@@ -485,6 +515,8 @@ public class MainActivity extends AppCompatActivity {
                 //Log.i("alaa" , result);
                 float targetsTime =data.getFloatExtra("targetsTime" , -1);
                 float heartRate =data.getFloatExtra("maxHeartRate" , -1);
+                int round = data.getIntExtra("Points" , -1);
+                Log.i("rounds" , "points = " + round);
                 if((targetsTime != -1) && (heartRate != -1) ){
                     if (usedLayout.getTargetTime() == -1){
                        layoutTableDB nlayout = new layoutTableDB(usedLayout.getLayout_name(),usedLayout.getIntersect(),usedLayout.getPathLines()

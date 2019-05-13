@@ -87,11 +87,7 @@ public class DrawLayoutActivity extends AppCompatActivity {
                     //toast.setMargin(50,50);
                     toast.show();
                 }
-//                if(intersectedPoints.size() == 0){
-//                    Toast toast=Toast.makeText(getApplicationContext(),"the layout must contain intersection points",Toast.LENGTH_SHORT);
-//                    //toast.setMargin(50,50);
-//                    toast.show();
-//                }
+
                 else{
                 if(intersectedPoints.size() !=  0) {
 

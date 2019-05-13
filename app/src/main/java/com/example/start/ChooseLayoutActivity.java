@@ -131,6 +131,7 @@ public class ChooseLayoutActivity extends AppCompatActivity {
                 checkedTrue = newLayout ;
                 Log.i("checked" , "new checked profile " + newLayout.getLayout_name());
                 hiitViewModel.update(newLayout);
+                finish();
 
             }
             @Override
