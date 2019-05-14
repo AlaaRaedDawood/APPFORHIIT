@@ -290,8 +290,8 @@ private ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints
        checkI();
         invalidate();
 
-
         return true ;
+
     }
     public void checkI(){
         int repeatedpointindex = -1 ;
@@ -319,6 +319,10 @@ private ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints
             }
             for(int i = 0 ; i < inn.size() ; i++){
                 intersectPoints.remove(inn.get(i));
+                if(intersectPointID > 0){
+                    intersectPointID -- ;
+                }
+
             }
            // x = 0 ;
             ArrayList<IntersectedPoints>in = new  ArrayList<IntersectedPoints>();

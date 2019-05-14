@@ -10,12 +10,14 @@ public class PerformanceTableDB {
     private  String date ;
     private float time ;
     private int user_heartRate ;
+    private int user_score ;
     //to be able to know if it is a trial or playinggame
    // private int flag ;
-    public PerformanceTableDB(String date,float time , int user_heartRate){
+    public PerformanceTableDB(String date,float time , int user_heartRate ,int user_score ){
         this.date=date;
         this.time = time ;
         this.user_heartRate = user_heartRate;
+        this.user_score = user_score ;
        // this.user_heartRate = user_heartRate ;
     }
 
@@ -38,5 +40,8 @@ public class PerformanceTableDB {
 
     public int getUser_heartRate() {
         return user_heartRate;
+    }
+    public int getUser_score() {
+        return user_score;
     }
 }

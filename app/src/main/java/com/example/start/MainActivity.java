@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(3000);
         animationDrawable.start();
           buttonPlay = (Button)(findViewById(R.id.button_play));
+          buttonPlay.setVisibility(View.GONE);
         hiitViewModel.getAllLayouts().observe(MainActivity.this, new Observer<List<layoutTableDB>>() {
             @Override
             public void onChanged(@Nullable List<layoutTableDB> layouts) {
@@ -266,10 +267,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkPlayButton() {
-        if(usedLayout == null){
-            buttonPlay.setVisibility(View.GONE);
-
-        }else if(usedLayout.getTargetTime() == -1){
+         if(usedLayout.getTargetTime() == -1){
             buttonPlay.setVisibility(View.VISIBLE);
             buttonPlay.setText("TRIAL");
         }else if(usedLayout.getTargetTime() != -1) {
@@ -515,21 +513,23 @@ public class MainActivity extends AppCompatActivity {
                 //Log.i("alaa" , result);
                 float targetsTime =data.getFloatExtra("targetsTime" , -1);
                 float heartRate =data.getFloatExtra("maxHeartRate" , -1);
-                int round = data.getIntExtra("Points" , -1);
-                Log.i("rounds" , "points = " + round);
-                if((targetsTime != -1) && (heartRate != -1) ){
+                int score = data.getIntExtra("points" , -1);
+                Log.i("rounds" , "points = " + score);
+                if((targetsTime != -1) && (heartRate != -1) && (score != -1) ){
                     if (usedLayout.getTargetTime() == -1){
                        layoutTableDB nlayout = new layoutTableDB(usedLayout.getLayout_name(),usedLayout.getIntersect(),usedLayout.getPathLines()
                        ,usedLayout.getIntersectPoints(),usedLayout.getStartPoints(),usedLayout.getStopPoints(),targetsTime,usedLayout.getUsed());
                        nlayout.setId(usedLayout.getId());
                        hiitViewModel.update(nlayout);
                     }else {
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        String currentDateandTime = sdf.format(new Date());
-                        Log.i("Android to Unity", "targets time = " + targetsTime);
-                        Log.i("Android to Unity", "heartRate = " + heartRate);
-                        PerformanceTableDB performance = new PerformanceTableDB(currentDateandTime, targetsTime, (int) heartRate);
-                        hiitViewModel.insertPerformance(performance);
+                        if(score != -2) {
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            String currentDateandTime = sdf.format(new Date());
+                            Log.i("Android to Unity", "targets time = " + targetsTime);
+                            Log.i("Android to Unity", "heartRate = " + heartRate);
+                            PerformanceTableDB performance = new PerformanceTableDB(currentDateandTime, targetsTime, (int) heartRate, score);
+                            hiitViewModel.insertPerformance(performance);
+                        }
                     }
                     Toast toast = Toast.makeText(getApplicationContext(), "targetsTime " + targetsTime +
                             " heartRate = " + heartRate , Toast.LENGTH_SHORT);
