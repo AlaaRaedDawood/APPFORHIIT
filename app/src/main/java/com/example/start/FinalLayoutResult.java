@@ -91,6 +91,12 @@ public class FinalLayoutResult extends AppCompatActivity {
         final Animation anime_alpha = AnimationUtils.loadAnimation(this ,R.anim.alpha_button);
         Button btn_save = (Button) findViewById(R.id.saveButton);
         Button btn_edit = (Button) findViewById(R.id.editButton);
+        Button btn_back = (Button) findViewById(R.id.button_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                finish();
+            }});
         hiitViewModel.getProfileSize().observe(this , new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer profilesize) {

@@ -41,7 +41,7 @@ public class ChooseLayoutActivity extends AppCompatActivity {
 
         final LayoutAdapter adapter = new LayoutAdapter();
         recyclerView.setAdapter(adapter);
-        final TextView t  = (TextView)findViewById(R.id.usedLayout);
+//        final TextView t  = (TextView)findViewById(R.id.usedLayout);
 
         hiitViewModel = ViewModelProviders.of(ChooseLayoutActivity.this).get(HiitViewModel.class);
         hiitViewModel.getAllLayouts().observe(ChooseLayoutActivity.this, new Observer<List<layoutTableDB>>() {
@@ -67,11 +67,11 @@ public class ChooseLayoutActivity extends AppCompatActivity {
                     toast.show();
                 //adapter.setLayouts(layouts);
             }
-                if(checkedTrue != null){
-                    t.setText(checkedTrue.getLayout_name());
-                }else{
-                    t.setText("y msbrna");
-                }
+//                if(checkedTrue != null){
+//                    t.setText(checkedTrue.getLayout_name());
+//                }else{
+//                    t.setText("y msbrna");
+//                }
                 adapter.setLayouts(layoutview);
             }
         });

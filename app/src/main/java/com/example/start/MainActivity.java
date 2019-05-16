@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<PathLine> layoutpaths = new ArrayList<>() ;
     private int maxheartrate ;
     private int[] hiitRatioplay = {2,2,4,6};
-    private int[] hiitRatiorest = {4,2,2,2};
+    private int[] hiitRatiorest = {2,2,2,2};
     private  float targetTimeLimit  ;
     private  String lastGamePlayedDate = "" ;
     private   Button buttonPlay ;
@@ -174,9 +174,11 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 //getUsedLayout();
+                checkPerformance();
                 final View view = v;
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String currentDateandTime = sdf.format(new Date());
+                Log.i("performance date" , "today is " +currentDateandTime+" last " + lastGamePlayedDate);
                 if(currentDateandTime.equals(lastGamePlayedDate)){
                     Toast toast = Toast.makeText(getApplicationContext(), "Only one game is allowed a day ", Toast.LENGTH_SHORT);
                     toast.show();
@@ -269,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
     public void checkPlayButton() {
          if(usedLayout.getTargetTime() == -1){
             buttonPlay.setVisibility(View.VISIBLE);
-            buttonPlay.setText("TRIAL");
+            buttonPlay.setText("PreGame");
         }else if(usedLayout.getTargetTime() != -1) {
             buttonPlay.setVisibility(View.VISIBLE);
             buttonPlay.setText("Play");
@@ -368,10 +370,17 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("point2ID", point2ID);
                     intent.putExtra("size", size);
                     intent.putExtra("flag", 1);
+
                     if(targetTimeLimit != -1) {
                         int t = (int) (targetTimeLimit +1 );
                         int restTimerLimit = -1 ;
-                        int targetcountLimit = hiitRatioplay[performanceCount] ;
+                        int targetcountLimit = 0 ;
+                        if(performanceCount > 3){
+                             targetcountLimit = hiitRatioplay[3];
+                        }else {
+                             targetcountLimit = hiitRatioplay[performanceCount] ;
+                        }
+
                         int ratio = hiitRatiorest[performanceCount];
                         Log.i("playgame" , "r=" + (performanceCount) + " targetcountLimit = " +targetcountLimit + " r ="+restTimerLimit);
                         restTimerLimit = t*ratio ;
@@ -408,11 +417,10 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<PerformanceTableDB> performances) {
                 date.clear();
                 heartRate.clear();
-                if(performances.size()>1) {
-                    lastGamePlayedDate = performances.get(performances.size() - 1).getDate();
-                }
+
                 if(performances.size() > 0 ){
                     targetTimeLimit  = performances.get(performances.size() - 1).getTime();
+                    lastGamePlayedDate = performances.get(performances.size() - 1).getDate();
                 }
 
 
@@ -531,6 +539,8 @@ public class MainActivity extends AppCompatActivity {
                             hiitViewModel.insertPerformance(performance);
                         }
                     }
+                  // String min = ((int)(targetsTime / 60)) + "";
+                    //String seconds = (targetsTime % 60);
                     Toast toast = Toast.makeText(getApplicationContext(), "targetsTime " + targetsTime +
                             " heartRate = " + heartRate , Toast.LENGTH_SHORT);
 

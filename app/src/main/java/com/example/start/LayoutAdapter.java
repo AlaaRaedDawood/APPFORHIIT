@@ -1,16 +1,20 @@
 package com.example.start;
 
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.start.R.color.colorAccent;
 
 public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.LayoutHolder> {
     private List<layoutTableDB> layouts = new ArrayList<>();
@@ -29,8 +33,10 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.LayoutHold
         holder.textViewTitle.setText(currentLayout.getLayout_name());
         if(currentLayout.getUsed() == 1){
             //btn_save.setVisibility(View.GONE);
+            holder.layoutHolder.setBackgroundColor(Color.parseColor("#f48fb1"));
             holder.button_check.setVisibility(View.INVISIBLE);
         }else {
+           // holder.layoutHolder.setBackgroundColor(Color.WHITE);
             holder.button_check.setVisibility(View.VISIBLE);
         }
 
@@ -54,12 +60,14 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.LayoutHold
         private Button button_view ;
         private Button button_check ;
         private Button button_edit;
+        private RelativeLayout layoutHolder ;
         public LayoutHolder(View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             button_delete = itemView.findViewById(R.id.deleteButton);
             button_view = itemView.findViewById(R.id.viewButton);
             button_edit = itemView.findViewById(R.id.editButton);
+            layoutHolder = itemView.findViewById(R.id.relativelayout);
             button_check = itemView.findViewById(R.id.chooseButton);
             button_delete.setOnClickListener(new View.OnClickListener() {
                 @Override

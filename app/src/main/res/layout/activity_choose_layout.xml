@@ -23,34 +23,33 @@
             android:layout_height="65dp"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/ic_arrow_back_white" />
-        <TextView
-            android:background="#E1BEE7"
-            android:id="@+id/usedLayoutText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Used Layout :"
-            android:layout_marginTop="20dp"
-            android:textColor="#fff"
-            android:textSize="35dp" />
-        <TextView
-            android:background="#E1BEE7"
-            android:id="@+id/usedLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Used Layout"
-            android:layout_marginTop="0dp"
-            android:textColor="#fff"
-            android:textSize="35dp" />
+        <!--<TextView-->
+            <!--android:background="#E1BEE7"-->
+            <!--android:id="@+id/usedLayoutText"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Used Layout :"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:textColor="#fff"-->
+            <!--android:textSize="35dp" />-->
+        <!--<TextView-->
+            <!--android:background="#E1BEE7"-->
+            <!--android:id="@+id/usedLayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Used Layout"-->
+            <!--android:layout_marginTop="0dp"-->
+            <!--android:textColor="#fff"-->
+            <!--android:textSize="35dp" />-->
 
     </LinearLayout>
-
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="120dp"
         tools:listitem="@layout/content_choose_layout" />
 
 
