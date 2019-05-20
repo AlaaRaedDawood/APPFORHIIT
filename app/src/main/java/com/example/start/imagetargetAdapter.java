@@ -30,8 +30,9 @@ public class imagetargetAdapter  extends RecyclerView.Adapter<imagetargetAdapter
         @Override
         public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             //inflating and returning our view holder
-            LayoutInflater inflater = LayoutInflater.from(mCtx);
-            View view = inflater.inflate(R.layout.content_print_markers, null);
+           // LayoutInflater inflater = LayoutInflater.from(mCtx);
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.content_print_markers, parent, false);
             return new ImageViewHolder(view);
         }
 
@@ -80,10 +81,6 @@ public class imagetargetAdapter  extends RecyclerView.Adapter<imagetargetAdapter
         }}
     public interface OnItemClickListener {
             void onPrintClick(imagetarget imagetarget, View v);
-//        void onDeleteLayout(layoutTableDB layout , View v);
-//        void onViewLayout (layoutTableDB layout , View v);
-//        void onEditlayout(layoutTableDB layout, View v);
-//        void onChecklayout(layoutTableDB layout, View v);
     }
 
     public void setOnItemClickListener(imagetargetAdapter.OnItemClickListener listener) {

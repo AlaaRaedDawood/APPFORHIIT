@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -50,6 +52,7 @@ public class PrintMarkersActivity extends AppCompatActivity {
                finish();
             }
         });
+        final Animation anime_alpha = AnimationUtils.loadAnimation(this ,R.anim.anime_translate);
         //getting the recyclerview from xml
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -71,6 +74,21 @@ public class PrintMarkersActivity extends AppCompatActivity {
                         2,
                         "Image Target two",
                         R.drawable.two));
+        productList.add(
+                new imagetarget(
+                        3,
+                        "Image Target three",
+                        R.drawable.three));
+        productList.add(
+                new imagetarget(
+                        4,
+                        "Image Target four",
+                        R.drawable.four));
+        productList.add(
+                new imagetarget(
+                        5,
+                        "Image Target five",
+                        R.drawable.five));
 
         imagetargetAdapter adapter = new imagetargetAdapter(this, productList);
 
@@ -79,39 +97,18 @@ public class PrintMarkersActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new imagetargetAdapter.OnItemClickListener() {
             @Override
             public void onPrintClick(imagetarget imagetarget, View v) {
-                if(imagetarget.getId() == 1){
-                    ImageAsset imageAsset4x6 = new ImageAsset(PrintMarkersActivity.this, R.drawable.one, ImageAsset.MeasurementUnits.INCHES, 20, 20);
+                if(imagetarget.getId() > 0) {
+                    v.startAnimation(anime_alpha);
+                    ImageAsset imageAsset4x6 = new ImageAsset(PrintMarkersActivity.this, imagetarget.getImage(), ImageAsset.MeasurementUnits.INCHES, 20, 20);
                     PrintItem printItemDefault = new ImagePrintItem(PrintItem.ScaleType.CENTER, imageAsset4x6);
                     PrintJobData printJobData = new PrintJobData(PrintMarkersActivity.this, printItemDefault);
                     printJobData.setJobName("Example");
                     PrintUtil.setPrintJobData(printJobData);
                     PrintUtil.print(PrintMarkersActivity.this);
-                }else if(imagetarget.getId() == 2){
-                    ImageAsset imageAsset4x6 = new ImageAsset(PrintMarkersActivity.this, R.drawable.two, ImageAsset.MeasurementUnits.INCHES, 20, 20);
-                    PrintItem printItemDefault = new ImagePrintItem(PrintItem.ScaleType.CENTER, imageAsset4x6);
-                    PrintJobData printJobData = new PrintJobData(PrintMarkersActivity.this, printItemDefault);
-                    printJobData.setJobName("Example");
-                    PrintUtil.setPrintJobData(printJobData);
-                    PrintUtil.print(PrintMarkersActivity.this);
-                }
-
-            }
+                } }
         });
 
 
-//        Button printbutton =(Button)findViewById(R.id.printButton);
-//        printbutton.setOnClickListener(new View.OnClickListener() {
-//
-//            public void onClick(View v) {
-//
-//                ImageAsset imageAsset4x6 = new ImageAsset(PrintMarkersActivity.this, R.drawable.one, ImageAsset.MeasurementUnits.INCHES, 20, 20);
-//                PrintItem printItemDefault = new ImagePrintItem(PrintItem.ScaleType.CENTER, imageAsset4x6);
-//                PrintJobData printJobData = new PrintJobData(PrintMarkersActivity.this, printItemDefault);
-//                printJobData.setJobName("Example");
-//                PrintUtil.setPrintJobData(printJobData);
-//                PrintUtil.print(PrintMarkersActivity.this);
-//            }
-//        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

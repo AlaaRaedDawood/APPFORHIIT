@@ -242,7 +242,10 @@ public class FinalLayoutResult extends AppCompatActivity {
 //
     }
     public void returntomainactivity(){
-        Intent intent = new Intent(FinalLayoutResult.this, MainActivity.class);
+        Intent intent = new Intent(this, ChooseLayoutActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
+//        Intent intent = new Intent(FinalLayoutResult.this, MainActivity.class);
+//        startActivity(intent);
     }
 }

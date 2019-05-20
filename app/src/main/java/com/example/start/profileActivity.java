@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -120,11 +121,15 @@ private HiitViewModel hiitViewModel ;
          }if (none_rb.isChecked()){
                 backProblems = "none";
             }
+            if((!name.isEmpty()) && (!birthdate.isEmpty()) && (height != 0)){
+                //create new Profile
+                ProfileTableDb profile = new ProfileTableDb(name,height,weight,gender,birthdate,backProblems);
+                hiitViewModel.insertProfile(profile);
+            }else {
+                Toast toast = Toast.makeText(getApplicationContext(), "Make sure all data aren't empty ", Toast.LENGTH_SHORT);
+                toast.show();
+            }
 
-
-         //create new Profile
-         ProfileTableDb profile = new ProfileTableDb(name,height,weight,gender,birthdate,backProblems);
-         hiitViewModel.insertProfile(profile);
         }
     });
         btn_edit.setOnClickListener(new View.OnClickListener() {
@@ -152,11 +157,17 @@ private HiitViewModel hiitViewModel ;
                 }
 
                 //update new Profile
+                if((!name.isEmpty()) && (!birthdate.isEmpty()) && (height != 0)){
+
                 if(profileId != -1){
                 ProfileTableDb profile = new ProfileTableDb(name,height,weight,gender,birthdate,backProblems);
                 profile.setId(profileId);
                 hiitViewModel.updateProfile(profile);
-            }
+            }}
+            else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Make sure all data aren't empty ", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
 
