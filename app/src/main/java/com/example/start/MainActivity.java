@@ -61,16 +61,21 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(3000);
         animationDrawable.start();
           buttonPlay = (Button)(findViewById(R.id.button_play));
-          buttonPlay.setVisibility(View.GONE);
+          //buttonPlay.setVisibility(View.GONE);
+        buttonPlay.setText("Exercise");
         hiitViewModel.getAllLayouts().observe(MainActivity.this, new Observer<List<layoutTableDB>>() {
             @Override
             public void onChanged(@Nullable List<layoutTableDB> layouts) {
+                usedLayout = null ;
+                Log.i("playButton" , "usedLayout check is back");
                 for(int i = 0 ; i < layouts.size() ; i++){
                     if(layouts.get(i).getUsed() ==1) {
                         usedLayout = layouts.get(i);
-                        checkPlayButton();
                         Log.i("playButton" , "usedLayout is in index = " + i);
-                    }}}});
+                        break;
+                    }}
+                checkPlayButton();
+            }});
         final Animation anime_translate = AnimationUtils.loadAnimation(this ,R.anim.anime_translate);
 
         Button buttonPerformance = (Button)(findViewById(R.id.button_performance));
@@ -95,73 +100,7 @@ public class MainActivity extends AppCompatActivity {
         buttonTrial.setVisibility(View.GONE);
 
 
-       // buttonTrial.setVisibility(View.GONE);
-//        hiitViewModel.getPerformanceSize().observe(this , new Observer<Integer>() {
-//            @Override
-//            public void onChanged(@Nullable Integer performanceSize)
-//            {
-//                if(performanceSize == 0){
-//                    buttonTrial.setVisibility(View.VISIBLE);
-//                    buttonPlay.setVisibility(View.GONE);
-//                }else {
-//                    buttonPlay.setVisibility(View.VISIBLE);
-//                    buttonTrial.setVisibility(View.GONE);
-//                }
-//                performanceCount = performanceSize ;
-//                Log.i("DB" , "the profile size is " + performanceSize);
-//
-//            }});
 
-//        buttonTrial.setOnClickListener(new View.OnClickListener() {
-//
-//            public void onClick(View v) {
-//                final View view = v;
-//
-//                hiitViewModel.getAllLayouts().observe(MainActivity.this, new Observer<List<layoutTableDB>>() {
-//                    @Override
-//                    public void onChanged(@Nullable List<layoutTableDB> layouts) {
-//                        for(int i = 0 ; i < layouts.size() ; i++){
-//                            if(layouts.get(i).getUsed() ==1){
-//                                layoutpaths = layouts.get(i).getPathLines();
-//                                Log.i("aaaaaaaaaaaaaaaaaaa" , "layoutpath used is " +layouts.get(i).getUsed() );
-//                                Log.i("aaaaaaaaaaaaaaaaaaa" , "layoutpath size is " +layouts.get(i).getPathLines().size() );
-//
-//                                Log.i("aaaaaaaaaaaaaaaaaaa" , "layout in path size is " +layoutpaths.size() );
-//                                break;
-//                            }
-//                        }
-//                        if(layoutpaths.size() != 0) {
-//                            if (layoutpaths != null) {
-//                                int[] point1ID = new int[layoutpaths.size()];;
-//                                int[] point2ID = new int[layoutpaths.size()];
-//                                float[] size = new float[layoutpaths.size()];
-//                                Log.i("aaaaaaaaaaaaaaaaaaaaaa", "layout size is " + layoutpaths.size());
-//                                for (int i = 0; i < layoutpaths.size(); i++) {
-//                                    Log.i("PATHLINE", "layout point1ID is " + layoutpaths.get(i).getPoint1ID() + " point2ID "
-//                                            + layoutpaths.get(i).getPoint2ID() +" size is " + layoutpaths.get(i).getSize());
-//                                    point1ID[i] = layoutpaths.get(i).getPoint1ID();
-//                                    point2ID[i] = layoutpaths.get(i).getPoint2ID();
-//                                    size[i] = layoutpaths.get(i).getSize();
-//                                }
-//                                //profiles.get(0).getBirthdate();
-//                                Log.i("aaaaaaaaaaaaaaaaaaaaaa " , " point1ID " + point1ID[0]);
-//                                view.startAnimation(anime_translate);
-//                                Intent intent = new Intent(MainActivity.this, UnityPlayerActivity.class);
-//                                intent.putExtra("maxheartRate", maxheartrate);
-//                                intent.putExtra("point1ID", point1ID);
-//                                intent.putExtra("point2ID", point2ID);
-//                                intent.putExtra("size", size);
-//                                intent.putExtra("flag", 0);
-//                                startActivityForResult(intent, 1);
-//                                //startActivity(intent);
-//                            }
-//
-//                        }
-//
-//
-//
-//                    }});
-//            }});
         buttonPrint.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -173,6 +112,21 @@ public class MainActivity extends AppCompatActivity {
         buttonPlay.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+//                usedLayout = null ;
+//                hiitViewModel.getAllLayouts().observe(MainActivity.this, new Observer<List<layoutTableDB>>() {
+//                    @Override
+//                    public void onChanged(@Nullable List<layoutTableDB> layouts) {
+//
+//                        for(int i = 0 ; i < layouts.size() ; i++){
+//                            if(layouts.get(i).getUsed() ==1) {
+//                                usedLayout = layouts.get(i);
+//                                Log.i("playButton" , "usedLayout is in index = " + i);
+//                                break;
+//                            }}
+//                        checkPlayButton();
+//                    }
+//
+//                });
                 //getUsedLayout();
                 checkPerformance();
                 final View view = v;
@@ -183,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Only one game is allowed a day ", Toast.LENGTH_SHORT);
                     toast.show();
                 }else {
+
+                    if(usedLayout != null){
                   if(usedLayout.getTargetTime() == -1){
                       view.startAnimation(anime_translate);
                       doTrial();
@@ -190,7 +146,11 @@ public class MainActivity extends AppCompatActivity {
                   else {
                       view.startAnimation(anime_translate);
                       doPlay();
-                  }
+                  }}else {
+                        Toast toast = Toast.makeText(getApplicationContext(), "make sure to choose a layout first", Toast.LENGTH_SHORT);
+                        toast.show();
+
+                    }
 
                 }
             }});
@@ -269,13 +229,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkPlayButton() {
+        buttonPlay.setText("Exercise");
+        if(usedLayout != null){
          if(usedLayout.getTargetTime() == -1){
-            buttonPlay.setVisibility(View.VISIBLE);
-            buttonPlay.setText("PreGame");
+             buttonPlay.setText("measure target's time limit");
+             Log.i("playButton", "problem");
         }else if(usedLayout.getTargetTime() != -1) {
-            buttonPlay.setVisibility(View.VISIBLE);
-            buttonPlay.setText("Play");
-        }
+             buttonPlay.setText("Exercise");
+        }}
     }
 
     private void doTrial(){
@@ -286,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
                     if(layouts.get(i).getUsed() ==1){
                         usedLayout = layouts.get(i);
                         layoutpaths = layouts.get(i).getPathLines();
+                        targetTimeLimit = layouts.get(i).getTargetTime();
                         targetTimeLimit = layouts.get(i).getTargetTime();
 
                         Log.i("aaaaaaaaaaaaaaaaaaa" , "layoutpath used is " +layouts.get(i).getUsed() );

@@ -42,20 +42,7 @@ public class targetPosition extends View {
         if(showTarget){
             paint.setTextSize(80);
             if(backProblems.equals("none")){
-                canvas.drawLine(506, 180, 506, 600, paint);
-                canvas.drawLine(506, 180, 793, 273, paint);
-                canvas.drawLine(793, 273, 781, 739, paint);
-                canvas.drawLine(506, 600, 781, 739, paint);
-                canvas.drawLine(506, 600, 781, 739, paint);
-                canvas.drawLine(506, 600, 231, 739, paint);
-                canvas.drawLine(506, 180, 219, 273, paint);
-                canvas.drawLine(231, 739, 219, 273, paint);
-                canvas.drawText(String.valueOf(user_height), 506 , 400, paint);
-                targetwallposition = 0 ;
-            }
-            if(backProblems.equals("upper")){
-                //middle line
-
+                paint.setColor(Color.BLACK);
                 canvas.drawLine(506, 80, 506, 840, paint);
                 canvas.drawLine(506, 80, 793, 173, paint);
                 canvas.drawLine(793, 173, 781, 900, paint);
@@ -64,12 +51,34 @@ public class targetPosition extends View {
                 canvas.drawLine(506, 840, 231, 900, paint);
                 canvas.drawLine(506, 80, 219, 173, paint);
                 canvas.drawLine(231, 900, 219, 173, paint);
-                canvas.drawText(String.valueOf(user_height-110), 506 , 500, paint);
-                canvas.drawText(String.valueOf(60), 506 , 730, paint);
+                paint.setColor(Color.BLUE);
+                canvas.drawText(String.valueOf(user_height+20-50)+" cm", 506 , 500, paint);
+                canvas.drawText(String.valueOf(50) + " cm", 506 , 730, paint);
+                targetwallposition = 50 ;
+            }
+            if(backProblems.equals("upper")){
+                //middle line
+                paint.setColor(Color.BLACK);
+                canvas.drawLine(506, 80, 506, 840, paint);
+                canvas.drawLine(506, 80, 793, 173, paint);
+                canvas.drawLine(793, 173, 781, 900, paint);
+                canvas.drawLine(506, 840, 781, 900, paint);
+                canvas.drawLine(506, 840, 781, 900, paint);
+                canvas.drawLine(506, 840, 231, 900, paint);
+                canvas.drawLine(506, 80, 219, 173, paint);
+                canvas.drawLine(231, 900, 219, 173, paint);
+                paint.setColor(Color.BLUE);
+                if(user_height > 110) {
+                    canvas.drawText(String.valueOf(user_height - 110) + " cm", 506, 500, paint);
+                }else {
+                    canvas.drawText(String.valueOf(user_height-60) + " cm", 506, 500, paint);
+                }
+                canvas.drawText(String.valueOf(60) + " cm", 506 , 730, paint);
                 targetwallposition = 50 ;
                 //canvas.drawText(String.valueOf(user_height-100), 506 , 400, paint);
             }
             if(backProblems.equals("lower")) {
+                paint.setColor(Color.BLACK);
                 canvas.drawLine(506, 80, 506, 750, paint);
                 canvas.drawLine(506, 80, 793, 173, paint);
                 canvas.drawLine(793, 173, 781, 839, paint);
@@ -78,22 +87,24 @@ public class targetPosition extends View {
                 canvas.drawLine(506, 750, 231, 839, paint);
                 canvas.drawLine(506, 80, 219, 173, paint);
                 canvas.drawLine(231, 839, 219, 173, paint);
-                canvas.drawText(String.valueOf(user_height-120), 506 , 300, paint);
-                canvas.drawText(String.valueOf(user_height-60), 506 , 600, paint);
+                paint.setColor(Color.BLUE);
+                canvas.drawText(String.valueOf(user_height-120)+ " cm", 506 , 300, paint);
+                canvas.drawText(String.valueOf(user_height-60)+ " cm", 506 , 600, paint);
                 targetwallposition = -90 ;
             }
 
-        paint.setColor(Color.BLUE);
-
+       // paint.setColor(Color.BLUE);
+            paint.setColor(Color.GRAY);
 
         for (int i = 1; i < 50; i += 5) {
+
             canvas.drawCircle(506, 250+targetwallposition, i, paint);
         }
 
         for (int i = 1; i < 50; i += 5) {
             canvas.drawCircle(506, 550+targetwallposition, i, paint);
         }
-        paint.setColor(Color.GREEN);
+        paint.setColor(Color.BLUE);
 
 
             paint.setTextSize(50);

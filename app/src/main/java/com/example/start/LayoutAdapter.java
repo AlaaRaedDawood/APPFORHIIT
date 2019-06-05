@@ -36,7 +36,7 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.LayoutHold
             holder.layoutHolder.setBackgroundColor(Color.parseColor("#f48fb1"));
             holder.button_check.setVisibility(View.INVISIBLE);
         }else {
-           // holder.layoutHolder.setBackgroundColor(Color.WHITE);
+           holder.layoutHolder.setBackgroundColor(Color.WHITE);
             holder.button_check.setVisibility(View.VISIBLE);
         }
 

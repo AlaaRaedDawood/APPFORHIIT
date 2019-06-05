@@ -11,15 +11,15 @@ public class ProfileTableDb {
     private int id ;
     private  String user_name ;
     private int user_height ;
-    private int user_weight ;
+   // private int user_weight ;
     private  String user_gender ;
     private String birthdate ;
     private String user_backproblems ;
-    public ProfileTableDb(String user_name,int user_height , int user_weight, String user_gender ,String birthdate ,String user_backproblems
+    public ProfileTableDb(String user_name,int user_height , String user_gender ,String birthdate ,String user_backproblems
     ){
         this.user_name=user_name;
         this.user_height = user_height ;
-        this.user_weight = user_weight ;
+        //this.user_weight = user_weight ;
         this.user_gender=user_gender;
         this.birthdate=birthdate;
         this.user_backproblems = user_backproblems ;
@@ -46,9 +46,9 @@ public class ProfileTableDb {
     public String getUser_backproblems() {
         return user_backproblems;
     }
-    public int getUser_weight(){
-        return user_weight ;
-    }
+//    public int getUser_weight(){
+//        return user_weight ;
+//    }
     public String getBirthdate() {
         return birthdate;
     }

@@ -90,31 +90,31 @@
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <!--<android.support.design.widget.TextInputLayout-->
 
-        android:id="@+id/profile_weight"
+        <!--android:id="@+id/profile_weight"-->
 
-        android:layout_width="match_parent"
+        <!--android:layout_width="match_parent"-->
 
-        android:layout_height="wrap_content"
+        <!--android:layout_height="wrap_content"-->
 
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="260dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginStart="20dp"-->
+        <!--android:layout_marginTop="260dp"-->
+        <!--android:layout_marginEnd="20dp"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="1.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent">-->
 
-        <EditText
+        <!--<EditText-->
 
-            android:id="@+id/editText_profile_weight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/weight"
-            android:inputType="number" />
-    </android.support.design.widget.TextInputLayout>
+            <!--android:id="@+id/editText_profile_weight"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="@string/weight"-->
+            <!--android:inputType="number" />-->
+    <!--</android.support.design.widget.TextInputLayout>-->
 
     <android.support.design.widget.TextInputLayout
 
@@ -126,7 +126,7 @@
 
         android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="260dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +149,7 @@
 
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="330dp"
         android:layout_marginEnd="20dp"
         android:paddingTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -206,8 +206,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="51dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/button_shape_for_canvas"
         android:drawableRight="@drawable/ic_save_white"
         android:text="@string/saveButton"
@@ -229,8 +229,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="60dp"
         android:background="@drawable/button_shape_for_canvas"
         android:drawableRight="@drawable/ic_edit_white"
         android:text="@string/editButton"
@@ -269,7 +269,7 @@
 
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="470dp"
+        android:layout_marginTop="400dp"
         android:layout_marginEnd="20dp"
         android:paddingTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -305,9 +305,9 @@
                 android:id="@+id/up_radio_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="@string/upperback"
-                android:textColor="#fff"
-                android:checked="true"/>
+                android:textColor="#fff" />
 
             <RadioButton
                 android:id="@+id/lower_radio_btn"

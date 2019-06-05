@@ -113,7 +113,7 @@ public class LayOutCanvasResult extends View {
                         final EditText text = new EditText(getContext());
                         text.setInputType(InputType.TYPE_CLASS_NUMBER);
                         builder.setTitle("Set your measurments")
-                                .setMessage("the measure of distance is  for line " + selectedLine + " :").setView(text);
+                                .setMessage("the length in meters for line " + selectedLine + " :").setView(text);
                         builder.setPositiveButton("DONE",
                                 null);
 

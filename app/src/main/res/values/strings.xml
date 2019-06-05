@@ -29,13 +29,13 @@
     <string name="weight">Weight</string>
     <string name="title_activity_performance_graph">performanceGraphActivity</string>
     <string name="chartGraph">The values of your performances</string>
-    <string name="play">Play</string>
+    <string name="play">Exercise</string>
     <string name="performance">View Performance</string>
     <string name="trial">Trial</string>
     <string name="title_activity_traget_position">TragetPositionActivity</string>
     <string name="editB">Edit</string>
     <string name="value">Value</string>
     <string name="heartrate">HeartRate</string>
-    <string name="points">Points</string>
+    <string name="points">Score</string>
 
 </resources>

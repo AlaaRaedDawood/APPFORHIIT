@@ -91,7 +91,7 @@ private HiitViewModel hiitViewModel ;
    final EditText userName_et = ((EditText)findViewById(R.id.editText_profile_name));
    final EditText birthdate_et = ((EditText)findViewById(R.id.editText_birthdateText));
    final EditText height_et = ((EditText)findViewById(R.id.editText_profile_height));
-   final EditText weight_et = ((EditText)findViewById(R.id.editText_profile_weight));
+   //final EditText weight_et = ((EditText)findViewById(R.id.editText_profile_weight));
    final RadioButton female_rb= (RadioButton) findViewById(R.id.female_radio_btn);
    final RadioButton male_rb= (RadioButton) findViewById(R.id.male_radio_btn);
    final RadioButton upper_rb= (RadioButton) findViewById(R.id.up_radio_btn);
@@ -104,7 +104,7 @@ private HiitViewModel hiitViewModel ;
          String name = userName_et.getText().toString();
          String birthdate = birthdate_et.getText().toString();
          int height = Integer.parseInt(height_et.getText().toString());
-         int weight = Integer.parseInt(weight_et.getText().toString());
+        // int weight = Integer.parseInt(weight_et.getText().toString());
          String gender = "";
 
          if(female_rb.isChecked()){
@@ -123,7 +123,7 @@ private HiitViewModel hiitViewModel ;
             }
             if((!name.isEmpty()) && (!birthdate.isEmpty()) && (height != 0)){
                 //create new Profile
-                ProfileTableDb profile = new ProfileTableDb(name,height,weight,gender,birthdate,backProblems);
+                ProfileTableDb profile = new ProfileTableDb(name,height,gender,birthdate,backProblems);
                 hiitViewModel.insertProfile(profile);
             }else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Make sure all data aren't empty ", Toast.LENGTH_SHORT);
@@ -137,7 +137,7 @@ private HiitViewModel hiitViewModel ;
             public void onClick(View v) {
                 String name = userName_et.getText().toString();
                 int height = Integer.parseInt(height_et.getText().toString());
-                int weight = Integer.parseInt(weight_et.getText().toString());
+               // int weight = Integer.parseInt(weight_et.getText().toString());
                 String birthdate = birthdate_et.getText().toString();
                 String gender ;
 
@@ -160,7 +160,7 @@ private HiitViewModel hiitViewModel ;
                 if((!name.isEmpty()) && (!birthdate.isEmpty()) && (height != 0)){
 
                 if(profileId != -1){
-                ProfileTableDb profile = new ProfileTableDb(name,height,weight,gender,birthdate,backProblems);
+                ProfileTableDb profile = new ProfileTableDb(name,height,gender,birthdate,backProblems);
                 profile.setId(profileId);
                 hiitViewModel.updateProfile(profile);
             }}
@@ -188,7 +188,7 @@ private HiitViewModel hiitViewModel ;
                      userName_et.setText(profiles.get(0).getUser_name());
                      birthdate_et.setText(profiles.get(0).getBirthdate());
                      height_et.setText(Integer.toString(profiles.get(0).getUser_height()));
-                     weight_et.setText(Integer.toString(profiles.get(0).getUser_weight()));
+                     ///weight_et.setText(Integer.toString(profiles.get(0).getUser_weight()));
                      if(profiles.get(0).getUser_gender().equals("female")){
                          female_rb.setChecked(true);
                          male_rb.setChecked(false);

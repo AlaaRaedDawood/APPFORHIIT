@@ -154,9 +154,6 @@ private ArrayList<IntersectedPoints> intersect = new ArrayList<IntersectedPoints
                 invalidate();
                 return true;
             case MotionEvent.ACTION_MOVE:
-//                endX = xPos ;
-//                endY = yPos ;
-//                return true;
                 endX = xPos ;
                 endY = yPos ;
                 drawPoints = false ;

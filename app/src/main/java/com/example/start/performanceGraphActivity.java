@@ -175,9 +175,9 @@ public class performanceGraphActivity extends AppCompatActivity {
                     }
 
 
-                    BarDataSet Bardataset = new BarDataSet(BARENTRY, "Points");
+                    BarDataSet Bardataset = new BarDataSet(BARENTRY, "Score");
                     BarData BARDATA = new BarData(BarEntryLabels, Bardataset);
-                    chart.setDescription("Points");
+                    chart.setDescription("Score");
                     Bardataset.setColor(Color.WHITE);
 
 
@@ -199,23 +199,23 @@ public void AddValuesToBARENTRY(float x , int i) {
 
 
 }
-    public void AddValuesToPoints() {
-
-        //BARENTRY.clear();
-       // Log.i("performance " , " hhhhhhhhhhhhhhhhhhh = " + x);
-        BARENTRY.add(new BarEntry(20, 0));
-        BARENTRY.add(new BarEntry(30, 1));
-        BARENTRY.add(new BarEntry(40, 2));
-
-    }
-    public void AddValuesToBarPoints(){
-
-
-        BarEntryLabels.add("alaa");
-        BarEntryLabels.add("alaa");
-        BarEntryLabels.add("alaa");
-
-    }
+//    public void AddValuesToPoints() {
+//
+//        //BARENTRY.clear();
+//       // Log.i("performance " , " hhhhhhhhhhhhhhhhhhh = " + x);
+//        BARENTRY.add(new BarEntry(20, 0));
+//        BARENTRY.add(new BarEntry(30, 1));
+//        BARENTRY.add(new BarEntry(40, 2));
+//
+//    }
+//    public void AddValuesToBarPoints(){
+//
+//
+//        BarEntryLabels.add("alaa");
+//        BarEntryLabels.add("alaa");
+//        BarEntryLabels.add("alaa");
+//
+//    }
     public void AddValuesToBarEntryLabels(String date){
 
         Log.i("performance " , " hhhhhhhhhhhhhhhhhhh = " + date);
