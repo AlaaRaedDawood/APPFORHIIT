@@ -59,20 +59,32 @@ public class imagetargetAdapter  extends RecyclerView.Adapter<imagetargetAdapter
             TextView textViewTitle, textViewShortDesc, textViewRating, textViewPrice;
             ImageView imageView;
             Button button_print ;
+            Button button_view;
             public ImageViewHolder(View itemView) {
                 super(itemView);
 
                 textViewTitle = itemView.findViewById(R.id.textViewTitle);
                 imageView = itemView.findViewById(R.id.imageView);
                 button_print = itemView.findViewById(R.id.buttonprint);
+                button_view = itemView.findViewById(R.id.buttonviewimage);
 
-
-            button_print.setOnClickListener(new View.OnClickListener() {
+                button_view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = getAdapterPosition();
+                        if (listener != null && position != RecyclerView.NO_POSITION) {
+                            listener.onViewClick(productList.get(position) ,v);
+                            //notifyDataSetChanged();
+                        }
+                    }
+                });
+                button_print.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (listener != null && position != RecyclerView.NO_POSITION) {
                         listener.onPrintClick(productList.get(position) ,v);
+
                         //notifyDataSetChanged();
                     }
                 }
@@ -81,6 +93,7 @@ public class imagetargetAdapter  extends RecyclerView.Adapter<imagetargetAdapter
         }}
     public interface OnItemClickListener {
             void onPrintClick(imagetarget imagetarget, View v);
+            void onViewClick (imagetarget imagetarget, View v);
     }
 
     public void setOnItemClickListener(imagetargetAdapter.OnItemClickListener listener) {

@@ -68,6 +68,7 @@
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/saveButton"
+        android:textSize="15dp"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/result_canvas" />
