@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class ViewLayoutCanvas extends View {
     private Paint paint;
     private int createRegion = 0 ;
+    private int targetIndex = -1 ;
     ArrayList<PointF> intersectPoints = new ArrayList<PointF>();
     private ArrayList<PointF> startPoints = new ArrayList<PointF>();
     private ArrayList<PointF> stopPoints = new ArrayList<PointF>();
@@ -49,8 +50,12 @@ public class ViewLayoutCanvas extends View {
                     paint.setColor(Color.GREEN);
                     canvas.drawText(index, intersectPoints.get(i).getX() + d, intersectPoints.get(i).getY(), paint);
 
+                    if(targetIndex == i){
+                        paint.setColor(Color.RED);
+                    }else {
+                        paint.setColor(Color.GRAY);
+                    }
 
-                    paint.setColor(Color.GRAY);
                     for (int radius = 0; radius < 41; radius++) {
                         canvas.drawCircle(intersectPoints.get(i).getX(), intersectPoints.get(i).getY(), radius, paint);
                     }
@@ -60,6 +65,7 @@ public class ViewLayoutCanvas extends View {
                     //Log.i("alaa", "the x = " + resultPoints.get(i).getX() + " y = " + resultPoints.get(i).getY());
 
                 }
+                targetIndex = -1 ;
                 createRegion ++ ;
             }
         }
@@ -82,5 +88,10 @@ public class ViewLayoutCanvas extends View {
     }
     public ArrayList<Region> getRegions() {
         return regions;
+    }
+    public void setTargetIndex(int i){
+        targetIndex = i;
+        invalidate();
+
     }
 }

@@ -65,6 +65,7 @@ public class FinalLayoutResult extends AppCompatActivity {
                         if (regions.get(i).contains(xPos, yPos)) {
                             targetflag = true ;
                             targetindex = i ;
+                            canvas.setTargetIndex(targetindex);
                             targetsize = canvas.getSize();
                            // targetWall.setShowTarget(i , canvas.getSize());
                             Log.i("region" , "region is selected" + i);

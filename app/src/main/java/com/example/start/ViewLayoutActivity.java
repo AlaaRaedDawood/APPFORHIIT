@@ -51,6 +51,7 @@ public class ViewLayoutActivity extends AppCompatActivity {
                         if (regions.get(i).contains(xPos, yPos)) {
                             targetflag = true ;
                             targetindex = i ;
+                            canvas.setTargetIndex(targetindex);
                             // targetWall.setShowTarget(i , canvas.getSize());
                             Log.i("region" , "region is selected" + i);
                             break;

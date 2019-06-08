@@ -14,6 +14,7 @@ public class FinalLayoutPath extends View {
     private Paint paint ;
     private float[] measures ;
    private int repeatDrawing = 0 ;
+   private int targetIndex = -1 ;
    //add jump height
    private int jumpHeight = 110 ;
     //ArrayList<PointF> resultPoints = new ArrayList<PointF>();
@@ -74,8 +75,12 @@ public class FinalLayoutPath extends View {
                         paint.setColor(Color.GREEN);
                         canvas.drawText(index, intersectPoints.get(i).getPoint().getX() + d, intersectPoints.get(i).getPoint().getY(), paint);
 
+                        if(targetIndex == i){
+                            paint.setColor(Color.RED);
+                        }else {
+                            paint.setColor(Color.GRAY);
+                        }
 
-                    paint.setColor(Color.GRAY);
                     for (int radius = 0; radius < 41; radius++) {
                         canvas.drawCircle(intersectPoints.get(i).getPoint().getX(), intersectPoints.get(i).getPoint().getY(), radius, paint);
                     }
@@ -87,6 +92,7 @@ public class FinalLayoutPath extends View {
                 }
                 repeatDrawing++;
                 createRegion += 1;
+                targetIndex = -1 ;
                 Log.i("alaat", "  the ssssssssssss  " + regions.size());
             }
         }
@@ -413,5 +419,10 @@ public boolean checkinDiagnole(ArrayList<PathLine> p , PathLine d){
     }
     public ArrayList<PointF> getStopPointsPoint(){
         return stopPoints;
+    }
+    public void setTargetIndex(int i){
+        targetIndex = i;
+        invalidate();
+
     }
 }
