@@ -15,14 +15,16 @@ public class ProfileTableDb {
     private  String user_gender ;
     private String birthdate ;
     private String user_backproblems ;
+    private int user_level ;
     public ProfileTableDb(String user_name,int user_height , String user_gender ,String birthdate ,String user_backproblems
-    ){
+  , int user_level  ){
         this.user_name=user_name;
         this.user_height = user_height ;
         //this.user_weight = user_weight ;
         this.user_gender=user_gender;
         this.birthdate=birthdate;
         this.user_backproblems = user_backproblems ;
+        this.user_level = user_level ;
     }
     public void setId(int id) {
         this.id = id;
@@ -46,7 +48,16 @@ public class ProfileTableDb {
     public String getUser_backproblems() {
         return user_backproblems;
     }
-//    public int getUser_weight(){
+
+    public int getUser_level() {
+        return user_level;
+    }
+
+    public void setUser_level(int user_level) {
+        this.user_level = user_level;
+    }
+
+    //    public int getUser_weight(){
 //        return user_weight ;
 //    }
     public String getBirthdate() {

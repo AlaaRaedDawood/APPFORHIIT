@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Integer> heartRate = new ArrayList<>() ;
     private ArrayList<PathLine> layoutpaths = new ArrayList<>() ;
     private int maxheartrate ;
+    private int minimumratio ;
     private int[] hiitRatioplay = {2,2,4,6};
     private int[] hiitRatiorest = {2,2,2,2};
     private  float targetTimeLimit  ;
@@ -232,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
         buttonPlay.setText("Exercise");
         if(usedLayout != null){
          if(usedLayout.getTargetTime() == -1){
-             buttonPlay.setText("measure target's time limit");
+             buttonPlay.setText("pre-Exercise");
              Log.i("playButton", "problem");
         }else if(usedLayout.getTargetTime() != -1) {
              buttonPlay.setText("Exercise");
@@ -277,6 +278,7 @@ public class MainActivity extends AppCompatActivity {
                           //  view.startAnimation(anime_translate);
                             Intent intent = new Intent(MainActivity.this, UnityPlayerActivity.class);
                             intent.putExtra("maxheartRate", maxheartrate);
+                            //intent.putExtra("minimumratio" , minimumratio);
                             intent.putExtra("point1ID", point1ID);
                             intent.putExtra("point2ID", point2ID);
                             intent.putExtra("size", size);
@@ -328,6 +330,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(MainActivity.this, UnityPlayerActivity.class);
                     intent.putExtra("maxheartRate", maxheartrate);
+                   // intent.putExtra("minimumratio" , minimumratio);
                     intent.putExtra("point1ID", point1ID);
                     intent.putExtra("point2ID", point2ID);
                     intent.putExtra("size", size);
@@ -461,11 +464,18 @@ public class MainActivity extends AppCompatActivity {
                         if (profiles.get(0).getUser_gender().equals("female")) {
                             maxheartrate = (int) (206.9 - (0.67 * age));
                             Log.i("aaaagggeee", "age" + age + " heart rate " + maxheartrate);
+
                         } else {
                             maxheartrate = (int) (206.9 - (0.88 * age));
+
+                        }
+                        if(profiles.get(0).getUser_level() != -1){
+                            minimumratio = profiles.get(0).getUser_level() ;
                         }
 
+
                     }
+
                 }
             }
         });
@@ -503,8 +513,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                   // String min = ((int)(targetsTime / 60)) + "";
                     //String seconds = (targetsTime % 60);
-                    Toast toast = Toast.makeText(getApplicationContext(), "targetsTime " + targetsTime +
-                            " heartRate = " + heartRate , Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Welcome Back" , Toast.LENGTH_SHORT);
 
                     toast.show();
 

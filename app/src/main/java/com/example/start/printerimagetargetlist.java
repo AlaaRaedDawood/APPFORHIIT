@@ -90,6 +90,31 @@ public class printerimagetargetlist extends Fragment {
                         5,
                         "Image Target five",
                         R.drawable.five));
+        productList.add(
+                new imagetarget(
+                        6,
+                        "Image Target six",
+                        R.drawable.six));
+        productList.add(
+                new imagetarget(
+                        7,
+                        "Image Target seven",
+                        R.drawable.seven));
+        productList.add(
+                new imagetarget(
+                        8,
+                        "Image Target eight",
+                        R.drawable.eight));
+        productList.add(
+                new imagetarget(
+                        9,
+                        "Image Target nine",
+                        R.drawable.nine));
+        productList.add(
+                new imagetarget(
+                        10,
+                        "Image Target ten",
+                        R.drawable.ten));
 
         imagetargetAdapter adapter = new imagetargetAdapter( getActivity(), productList);
         recyclerView.setAdapter(adapter);

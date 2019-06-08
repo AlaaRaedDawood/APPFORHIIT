@@ -97,13 +97,7 @@ public class FinalLayoutResult extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
             }});
-        hiitViewModel.getProfileSize().observe(this , new Observer<Integer>() {
-            @Override
-            public void onChanged(@Nullable Integer profilesize) {
-                profileSize = profilesize ;
-                Log.i("DB" , "the profile size is " + profilesize);
-
-            }});
+        checkProfile();
         if(layoutEditID == -1){
             btn_save.setVisibility(View.VISIBLE);
             btn_edit.setVisibility(View.INVISIBLE);
@@ -111,11 +105,17 @@ public class FinalLayoutResult extends AppCompatActivity {
             btn_edit.setVisibility(View.VISIBLE);
             btn_save.setVisibility(View.INVISIBLE);
         }
-
+        builder.setMessage("the name of the layout  ").setView(text);
+        builder.setPositiveButton("DONE",
+                null);
+        builder.setNegativeButton("CANCEL",
+                null);
+        final AlertDialog alert = builder.create();
         btn_save.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 buttonClicked += 1 ;
+                checkProfile();
                 Log.i("alaa","save button is clicked");
                 if((profileSize == 1 )&& (buttonClicked == 1)) {
                     //make alpha animation
@@ -125,14 +125,6 @@ public class FinalLayoutResult extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-
-
-                            builder.setMessage("the name of the layout  ").setView(text);
-                            builder.setPositiveButton("DONE",
-                                    null);
-
-
-                            final AlertDialog alert = builder.create();
 
                             alert.show();
                             alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -155,6 +147,7 @@ public class FinalLayoutResult extends AppCompatActivity {
                                         }
 
                                         alert.dismiss();
+                                        buttonClicked = 0 ;
                                         //start intent that returns to main activity
 //                                    finish();
 //                                    Intent i = new Intent(FinalLayoutResult.this , MainActivity.class);
@@ -166,7 +159,18 @@ public class FinalLayoutResult extends AppCompatActivity {
                                 }
                             });
 
+                            alert.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
 
+                                    buttonClicked = 0 ;
+                                        alert.dismiss();
+
+
+
+                                    }
+
+                            });
                         }
                     }, 500);
 
@@ -177,11 +181,15 @@ public class FinalLayoutResult extends AppCompatActivity {
                 }
             }
         });
+
+
+        final AlertDialog alert1 = builder.create();
         btn_edit.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
 
                 buttonClicked += 1 ;
+                checkProfile();
                 Log.i("alaa","save button is clicked");
                 if((profileSize == 1 )&& (buttonClicked == 1)) {
                     //make alpha animation
@@ -193,12 +201,7 @@ public class FinalLayoutResult extends AppCompatActivity {
                         public void run() {
 
 
-                            builder.setMessage("the name of the layout  ").setView(text);
-                            builder.setPositiveButton("DONE",
-                                    null);
-                            builder.setNegativeButton("Cancel" , null);
 
-                            final AlertDialog alert = builder.create();
                             alert.show();
                             alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -221,13 +224,25 @@ public class FinalLayoutResult extends AppCompatActivity {
                                         }
 
                                         alert.dismiss();
+                                        buttonClicked = 0 ;
 
 
                                     }
 
                                 }
                             });
+                            alert.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
 
+
+                                    alert.dismiss();
+                                    buttonClicked = 0 ;
+
+
+                                }
+
+                            });
 
                         }
                     }, 500);
@@ -247,5 +262,14 @@ public class FinalLayoutResult extends AppCompatActivity {
         startActivity(intent);
 //        Intent intent = new Intent(FinalLayoutResult.this, MainActivity.class);
 //        startActivity(intent);
+    }
+    public void checkProfile(){
+        hiitViewModel.getProfileSize().observe(this , new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer profilesize) {
+                profileSize = profilesize ;
+                Log.i("DB" , "the profile size is " + profileSize);
+
+            }});
     }
 }

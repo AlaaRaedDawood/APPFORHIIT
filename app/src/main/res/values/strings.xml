@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Start</string>
+    <string name="app_name">HIIT</string>
     <string name="action_settings">Settings</string>
     <string name="reset">Undo</string>
     <string name="clear">Clear</string>
@@ -28,7 +28,7 @@
     <string name="lowerback">lower</string>
     <string name="weight">Weight</string>
     <string name="title_activity_performance_graph">performanceGraphActivity</string>
-    <string name="chartGraph">The values of your performances</string>
+    <string name="chartGraph">Your Performance</string>
     <string name="play">Exercise</string>
     <string name="performance">View Performance</string>
     <string name="trial">Trial</string>
@@ -40,5 +40,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="level">Level</string>
+    <string name="beginner">beginner</string>
+    <string name="intermediate">intermediate</string>
+    <string name="advanced">advanced</string>
 
 </resources>

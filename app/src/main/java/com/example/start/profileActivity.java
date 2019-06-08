@@ -97,7 +97,9 @@ private HiitViewModel hiitViewModel ;
    final RadioButton upper_rb= (RadioButton) findViewById(R.id.up_radio_btn);
    final RadioButton lower_rb= (RadioButton) findViewById(R.id.lower_radio_btn);
    final RadioButton none_rb= (RadioButton) findViewById(R.id.none_radio_btn);
-
+        final RadioButton beginner_rb= (RadioButton) findViewById(R.id.b_radio_btn);
+        final RadioButton advanced_rb= (RadioButton) findViewById(R.id.a_radio_btn);
+        final RadioButton intermediate_rb= (RadioButton) findViewById(R.id.i_radio_btn);
     btn_save.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -113,6 +115,7 @@ private HiitViewModel hiitViewModel ;
              gender = "male";
          }
          String backProblems = "" ;
+         int user_level = -1 ;
          if(upper_rb.isChecked()){
              backProblems = "upper";
          }
@@ -121,9 +124,18 @@ private HiitViewModel hiitViewModel ;
          }if (none_rb.isChecked()){
                 backProblems = "none";
             }
+
+            if(beginner_rb.isChecked()){
+                user_level = 65;
+            }
+            if(advanced_rb.isChecked()){
+                user_level = 85;
+            }if (intermediate_rb.isChecked()){
+                user_level = 75;
+            }
             if((!name.isEmpty()) && (!birthdate.isEmpty()) && (height != 0)){
                 //create new Profile
-                ProfileTableDb profile = new ProfileTableDb(name,height,gender,birthdate,backProblems);
+                ProfileTableDb profile = new ProfileTableDb(name,height,gender,birthdate,backProblems,user_level);
                 hiitViewModel.insertProfile(profile);
             }else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Make sure all data aren't empty ", Toast.LENGTH_SHORT);
@@ -139,7 +151,8 @@ private HiitViewModel hiitViewModel ;
                 int height = Integer.parseInt(height_et.getText().toString());
                // int weight = Integer.parseInt(weight_et.getText().toString());
                 String birthdate = birthdate_et.getText().toString();
-                String gender ;
+                String gender = "" ;
+                int user_level = -1 ;
 
                 if(female_rb.isChecked()){
                     gender = "female" ;
@@ -155,12 +168,19 @@ private HiitViewModel hiitViewModel ;
                 }if (none_rb.isChecked()){
                     backProblems = "none";
                 }
-
+                if(beginner_rb.isChecked()){
+                    user_level = 65;
+                }
+                if(advanced_rb.isChecked()){
+                    user_level = 85;
+                }if (intermediate_rb.isChecked()){
+                    user_level = 75;
+                }
                 //update new Profile
                 if((!name.isEmpty()) && (!birthdate.isEmpty()) && (height != 0)){
 
                 if(profileId != -1){
-                ProfileTableDb profile = new ProfileTableDb(name,height,gender,birthdate,backProblems);
+                ProfileTableDb profile = new ProfileTableDb(name,height,gender,birthdate,backProblems ,user_level);
                 profile.setId(profileId);
                 hiitViewModel.updateProfile(profile);
             }}
@@ -211,6 +231,22 @@ private HiitViewModel hiitViewModel ;
                          lower_rb.setChecked(false);
                          none_rb.setChecked(true);
                      }
+                     if(profiles.get(0).getUser_level() == 65){
+                         beginner_rb.setChecked(true);
+                         intermediate_rb.setChecked(false);
+                         advanced_rb.setChecked(false);
+                     }
+                     if(profiles.get(0).getUser_level() == 85){
+                         beginner_rb.setChecked(false);
+                         intermediate_rb.setChecked(false);
+                         advanced_rb.setChecked(true);
+                     }
+                     if(profiles.get(0).getUser_level() == 75){
+                         beginner_rb.setChecked(false);
+                         intermediate_rb.setChecked(true);
+                         advanced_rb.setChecked(false);
+                     }
+
 
                  }
 

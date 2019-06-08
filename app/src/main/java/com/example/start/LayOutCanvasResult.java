@@ -114,6 +114,8 @@ public class LayOutCanvasResult extends View {
                         text.setInputType(InputType.TYPE_CLASS_NUMBER);
                         builder.setTitle("Set your measurments")
                                 .setMessage("the length in meters for line " + selectedLine + " :").setView(text);
+                        builder.setNegativeButton("CANCEL",
+                                null);
                         builder.setPositiveButton("DONE",
                                 null);
 
@@ -143,7 +145,18 @@ public class LayOutCanvasResult extends View {
 
                             }
                         });
+                        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
+
+                                alert.dismiss();
+
+
+
+                            }
+
+                        });
 
                     }
                 }, 500);

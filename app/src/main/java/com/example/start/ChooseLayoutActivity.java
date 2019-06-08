@@ -61,12 +61,12 @@ public class ChooseLayoutActivity extends AppCompatActivity {
                         layoutview.add(layouts.get(i));
                     }
                 }
-                if(layoutSize > 0){
-                    Toast toast=Toast.makeText(getApplicationContext(),"layout size is  " + layoutSize,Toast.LENGTH_SHORT);
-                    // toast.setMargin(50,50);
-                    toast.show();
-                //adapter.setLayouts(layouts);
-            }
+//                if(layoutSize > 0){
+//                    Toast toast=Toast.makeText(getApplicationContext(),"layout size is  " + layoutSize,Toast.LENGTH_SHORT);
+//                    // toast.setMargin(50,50);
+//                    toast.show();
+//                //adapter.setLayouts(layouts);
+//            }
 //                if(checkedTrue != null){
 //                    t.setText(checkedTrue.getLayout_name());
 //                }else{
