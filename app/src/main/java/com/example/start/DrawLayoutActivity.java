@@ -90,17 +90,22 @@ public class DrawLayoutActivity extends AppCompatActivity {
 
                 else{
                 if(intersectedPoints.size() !=  0) {
-
-                    v.startAnimation(anime_translate);
-                    Intent intent = new Intent(DrawLayoutActivity.this, LayOutForMeasuresActivity.class);
-                    intent.putExtra("startPoints" , startPoints);
-                    intent.putExtra("stopPoints" , stopPoints);
-                    intent.putExtra("intersectedPoints" ,intersectedPoints);
-                    intent.putExtra("layoutEditID" ,layoutEditID);
-                    startActivity(intent);
+                    if(intersectedPoints.size() < 6) {
+                        v.startAnimation(anime_translate);
+                        Intent intent = new Intent(DrawLayoutActivity.this, LayOutForMeasuresActivity.class);
+                        intent.putExtra("startPoints", startPoints);
+                        intent.putExtra("stopPoints", stopPoints);
+                        intent.putExtra("intersectedPoints", intersectedPoints);
+                        intent.putExtra("layoutEditID", layoutEditID);
+                        startActivity(intent);
+                    }else {
+                        Toast toast=Toast.makeText(getApplicationContext(),"intersection points mustn't exceed 5 points",Toast.LENGTH_SHORT);
+                        //toast.setMargin(50,50);
+                        toast.show();
+                    }
                     //Log.i("alaa", "ssizzee of x is " + xstart.size());
                 }else {
-                    Toast toast=Toast.makeText(getApplicationContext(),"the layout is empty",Toast.LENGTH_SHORT);
+                    Toast toast=Toast.makeText(getApplicationContext(),"the layout has no intersection points",Toast.LENGTH_SHORT);
                     //toast.setMargin(50,50);
                     toast.show();
                 }
