@@ -30,6 +30,7 @@ public class LayOutForMeasuresActivity extends AppCompatActivity {
     private Button button_back ;
     private float[] sizes ;
     private int layoutEditID = -1 ;
+    private layoutTableDB currentLayout ;
     //private HiitViewModel hiitViewModel ;
     //private int jumpHeight
     @Override
@@ -55,6 +56,10 @@ public class LayOutForMeasuresActivity extends AppCompatActivity {
         final ArrayList<PointF> stopPoints = (ArrayList<PointF>)getIntent().getSerializableExtra("stopPoints");
         final ArrayList<IntersectedPoints> intersectedPoints = (ArrayList<IntersectedPoints>)getIntent().getSerializableExtra("intersectedPoints");
         layoutEditID = getIntent().getIntExtra("layoutEditID" , -1);
+        if(layoutEditID != -1){
+           currentLayout = (layoutTableDB)getIntent().getSerializableExtra("layout");
+
+        }
         canvas.setStartPoints(startPoints);
         canvas.setStopPoints(stopPoints);
 
@@ -95,7 +100,9 @@ public class LayOutForMeasuresActivity extends AppCompatActivity {
                 intent.putExtra("intersectedPoints", intersectedPoints);
                 intent.putExtra("layoutEditID" , layoutEditID);
                 intent.putExtra("lineSizes" , measures);
-
+                if(layoutEditID != -1) {
+                    intent.putExtra("layout", currentLayout);
+                }
                 startActivity(intent);
             }}
         });

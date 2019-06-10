@@ -31,6 +31,7 @@ public class FinalLayoutResult extends AppCompatActivity {
     private int targetsize = -1 ;
     private int layoutEditID = -1;
     private int buttonClicked = 0 ;
+    private layoutTableDB currentLayout ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -42,6 +43,10 @@ public class FinalLayoutResult extends AppCompatActivity {
         final ArrayList<PointF> stopPoints = (ArrayList<PointF>)getIntent().getSerializableExtra("stopPoints");
         final ArrayList<IntersectedPoints> intersectedPoints = (ArrayList<IntersectedPoints>)getIntent().getSerializableExtra("intersectedPoints");
         layoutEditID = getIntent().getIntExtra("layoutEditID" , -1);
+        if(layoutEditID != -1){
+            currentLayout = (layoutTableDB)getIntent().getSerializableExtra("layout");
+
+        }
         float[] size = getIntent().getFloatArrayExtra("lineSizes");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN , WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -118,7 +123,7 @@ public class FinalLayoutResult extends AppCompatActivity {
                 buttonClicked += 1 ;
                 checkProfile();
                 Log.i("alaa","save button is clicked");
-                if((profileSize == 1 )&& (buttonClicked == 1)) {
+                if(profileSize == 1 ) {
                     //make alpha animation
                     v.startAnimation(anime_alpha);
                     //show a dialogue that takes from the user the name of the layout
@@ -192,7 +197,7 @@ public class FinalLayoutResult extends AppCompatActivity {
                 buttonClicked += 1 ;
                 checkProfile();
                 Log.i("alaa","save button is clicked");
-                if((profileSize == 1 )&& (buttonClicked == 1)) {
+                if(profileSize == 1 ) {
                     //make alpha animation
                     v.startAnimation(anime_alpha);
                     //show a dialogue that takes from the user the name of the layout
@@ -204,6 +209,8 @@ public class FinalLayoutResult extends AppCompatActivity {
 
 
                             alert.show();
+                            Log.i("edittt" , "name of layout is " + currentLayout.getLayout_name());
+                            text.setText(currentLayout.getLayout_name());
                             alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {

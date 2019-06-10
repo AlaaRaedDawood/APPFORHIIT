@@ -26,6 +26,7 @@ public class DrawLayoutActivity extends AppCompatActivity {
     private Button button_next ;
     private Button button_back ;
     private int createOredit = -1 ;
+    private layoutTableDB editedtLayout ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,7 @@ public class DrawLayoutActivity extends AppCompatActivity {
         final LayoutCanvas canvas = (LayoutCanvas) findViewById(R.id.draw_canvas);
         if(createOredit == 0){
             final layoutTableDB currentLayout = (layoutTableDB)getIntent().getSerializableExtra("layoutTableDb");
+            editedtLayout = currentLayout ;
             canvas.setStartPoints(currentLayout.getStartPoints());
             canvas.setStopPoints(currentLayout.getStopPoints());
             //canvas.setDonewithStack(currentLayout.getDoneWith());
@@ -97,6 +99,9 @@ public class DrawLayoutActivity extends AppCompatActivity {
                         intent.putExtra("stopPoints", stopPoints);
                         intent.putExtra("intersectedPoints", intersectedPoints);
                         intent.putExtra("layoutEditID", layoutEditID);
+                        if((editedtLayout!= null) && (layoutEditID!= -1) ) {
+                            intent.putExtra("layout", editedtLayout);
+                        }
                         startActivity(intent);
                     }else {
                         Toast toast=Toast.makeText(getApplicationContext(),"intersection points mustn't exceed 5 points",Toast.LENGTH_SHORT);

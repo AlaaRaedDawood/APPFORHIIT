@@ -137,6 +137,8 @@ private HiitViewModel hiitViewModel ;
                 //create new Profile
                 ProfileTableDb profile = new ProfileTableDb(name,height,gender,birthdate,backProblems,user_level);
                 hiitViewModel.insertProfile(profile);
+                Toast toast=Toast.makeText(getApplicationContext(),"The data was saved successfully",Toast.LENGTH_SHORT);
+                toast.show();
             }else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Make sure all data aren't empty ", Toast.LENGTH_SHORT);
                 toast.show();
@@ -183,6 +185,8 @@ private HiitViewModel hiitViewModel ;
                 ProfileTableDb profile = new ProfileTableDb(name,height,gender,birthdate,backProblems ,user_level);
                 profile.setId(profileId);
                 hiitViewModel.updateProfile(profile);
+                    Toast toast=Toast.makeText(getApplicationContext(),"The data was updated successfully",Toast.LENGTH_SHORT);
+                    toast.show();
             }}
             else {
                     Toast toast = Toast.makeText(getApplicationContext(), "Make sure all data aren't empty ", Toast.LENGTH_SHORT);

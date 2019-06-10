@@ -52,7 +52,7 @@ public class targetPosition extends View {
                 canvas.drawLine(506, 80, 219, 173, paint);
                 canvas.drawLine(231, 900, 219, 173, paint);
                 paint.setColor(Color.BLUE);
-                canvas.drawText(String.valueOf(user_height+20-50)+" cm", 506 , 500, paint);
+                canvas.drawText(String.valueOf(user_height+30-50)+" cm", 506 , 500, paint);
                 canvas.drawText(String.valueOf(50) + " cm", 506 , 730, paint);
                 targetwallposition = 50 ;
             }
@@ -68,11 +68,12 @@ public class targetPosition extends View {
                 canvas.drawLine(506, 80, 219, 173, paint);
                 canvas.drawLine(231, 900, 219, 173, paint);
                 paint.setColor(Color.BLUE);
-                if(user_height > 110) {
-                    canvas.drawText(String.valueOf(user_height - 110) + " cm", 506, 500, paint);
-                }else {
-                    canvas.drawText(String.valueOf(user_height-60) + " cm", 506, 500, paint);
-                }
+//                if(user_height > 110) {
+//                    canvas.drawText(String.valueOf(user_height - 100) + " cm", 506, 500, paint);
+//                }else {
+//                    canvas.drawText(String.valueOf(user_height-60) + " cm", 506, 500, paint);
+//                }
+                canvas.drawText(String.valueOf(user_height-60) + " cm", 506, 500, paint);
                 canvas.drawText(String.valueOf(60) + " cm", 506 , 730, paint);
                 targetwallposition = 50 ;
                 //canvas.drawText(String.valueOf(user_height-100), 506 , 400, paint);
@@ -88,8 +89,9 @@ public class targetPosition extends View {
                 canvas.drawLine(506, 80, 219, 173, paint);
                 canvas.drawLine(231, 839, 219, 173, paint);
                 paint.setColor(Color.BLUE);
-                canvas.drawText(String.valueOf(user_height-120)+ " cm", 506 , 300, paint);
-                canvas.drawText(String.valueOf(user_height-60)+ " cm", 506 , 600, paint);
+                canvas.drawText(String.valueOf(50)+ " cm", 506 , 300, paint);
+                //canvas.drawText(String.valueOf(user_height-50)+ " cm", 506 , 600, paint);
+                canvas.drawText(String.valueOf(user_height-30)+ " cm", 506 , 600, paint);
                 targetwallposition = -90 ;
             }
 

@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
                           //  view.startAnimation(anime_translate);
                             Intent intent = new Intent(MainActivity.this, UnityPlayerActivity.class);
                             intent.putExtra("maxheartRate", maxheartrate);
-                            //intent.putExtra("minimumratio" , minimumratio);
+                            intent.putExtra("minimumratio" , minimumratio);
                             intent.putExtra("point1ID", point1ID);
                             intent.putExtra("point2ID", point2ID);
                             intent.putExtra("size", size);
@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(MainActivity.this, UnityPlayerActivity.class);
                     intent.putExtra("maxheartRate", maxheartrate);
-                   // intent.putExtra("minimumratio" , minimumratio);
+                    intent.putExtra("minimumratio" , minimumratio);
                     intent.putExtra("point1ID", point1ID);
                     intent.putExtra("point2ID", point2ID);
                     intent.putExtra("size", size);
