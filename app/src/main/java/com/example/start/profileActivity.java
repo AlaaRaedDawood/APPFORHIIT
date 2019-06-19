@@ -129,7 +129,7 @@ private HiitViewModel hiitViewModel ;
                 user_level = 65;
             }
             if(advanced_rb.isChecked()){
-                user_level = 85;
+                user_level = 80;
             }if (intermediate_rb.isChecked()){
                 user_level = 75;
             }
@@ -174,7 +174,7 @@ private HiitViewModel hiitViewModel ;
                     user_level = 65;
                 }
                 if(advanced_rb.isChecked()){
-                    user_level = 85;
+                    user_level = 80;
                 }if (intermediate_rb.isChecked()){
                     user_level = 75;
                 }
@@ -240,7 +240,7 @@ private HiitViewModel hiitViewModel ;
                          intermediate_rb.setChecked(false);
                          advanced_rb.setChecked(false);
                      }
-                     if(profiles.get(0).getUser_level() == 85){
+                     if(profiles.get(0).getUser_level() == 80){
                          beginner_rb.setChecked(false);
                          intermediate_rb.setChecked(false);
                          advanced_rb.setChecked(true);

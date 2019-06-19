@@ -462,12 +462,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (age != -1) {
                         if (profiles.get(0).getUser_gender().equals("female")) {
-                            maxheartrate = (int) (206.9 - (0.67 * age));
+                            maxheartrate = (int) (206.9 - (0.88 * age));
                             Log.i("aaaagggeee", "age" + age + " heart rate " + maxheartrate);
 
                         } else {
-                            maxheartrate = (int) (206.9 - (0.88 * age));
-
+                            maxheartrate = (int) (206.9 - (0.67 * age));
                         }
                         if(profiles.get(0).getUser_level() != -1){
                             minimumratio = profiles.get(0).getUser_level() ;
